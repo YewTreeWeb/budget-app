@@ -1,9 +1,9 @@
 {
-	"name": "docuhyde",
+	"name": "budget-app",
 	"version": "1.0.0",
-	"description": "Open Source project starter kit and documentation website template made with Jekyll",
+	"description": "A budget app created with vanilla JavaScript and Jekyll",
 	"main": "index.js",
-	"repository": "git@github.com:kubixmedia/docuhyde.git",
+	"repository": "git@github.com:YewTreeWeb/budget-app.git",
 	"author": "YewTreeWeb <mathew.teague@yewtreeweb.co.uk>",
 	"license": "MIT",
 	"keywords": [
@@ -12,7 +12,6 @@
 		"airbnb",
 		"es6",
 		"gulp",
-		"typescript",
 		"scss",
 		"webpack"
 	],

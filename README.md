@@ -1,2 +1,3 @@
-# Docuhyde
-[![](https://img.shields.io/github/package-json/v/YewTreeWeb/docuhyde?logoColor=%23eb8a5e&style=for-the-badge)](https://docuhyde.netlify.com) [![](https://img.shields.io/maintenance/yes/2020?style=for-the-badge)](https://github.com/YewTreeWeb) [![NPM License](https://img.shields.io/npm/l/all-contributors.svg?style=for-the-badge)](https://github.com/YewTreeWeb/docuhyde/master/LICENSE)
+# Budget App
+
+A budget app created from the tutorial series ('The Complete JavaScript Course')[https://www.udemy.com/course/the-complete-javascript-course/] by Jonas Schmedtmann. Edited and adapted by (Mathew Teague)[https://yewtreeweb.co.uk/].
