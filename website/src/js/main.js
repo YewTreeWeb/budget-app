@@ -1,13 +1,15 @@
+/* eslint-disable no-undef */
+
 // External
 import 'airbnb-browser-shims'
 
 // Internal
 import './modules/helpers'
 
-const body = document.getElementsByTagName('body')[0]
-const html = document.getElementsByTagName('html')[0]
+const body = document.getElementsByTagName('body')
+const html = document.getElementsByTagName('html')
 
-// Remove loading class fron bosy on window load.
+// Remove loading class from body on window load.
 window.onload = () => {
   window.setTimeout(() => {
     body.classList.remove('is-loading')

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { src, dest, watch, lastRun, series, parallel } from 'gulp'
+import gulp from 'gulp'
 import autoprefixer from 'autoprefixer'
 import rucksack from 'rucksack-css'
 import webpack from 'webpack'
@@ -22,6 +22,8 @@ import extReplace from 'gulp-ext-replace'
 import yargs from 'yargs'
 import pkg from './package.json'
 import webpackConfig from './config/webpack.config'
+
+const { src, dest, watch, lastRun, series, parallel } = gulp
 
 const { prod } = yargs.argv
 
@@ -445,9 +447,10 @@ export const fonts = (done) => {
 export const jekyll = (done) => {
   const JEKYLL_ENV = prod ? 'JEKYLL_ENV=production' : 'JEKYLL_ENV=development'
   const build = !prod
-    ? `jekyll build --config config/jekyll.config.yml, config/jekyll.config.dev.yml ${config.jekyll.flags.dev}`
+    ? `jekyll build --config config/jekyll.config.yml,config/jekyll.config.dev.yml ${config.jekyll.flags.dev}`
     : `jekyll build --config config/jekyll.config.yml ${config.jekyll.flags.prod}`
 
+  console.info(JEKYLL_ENV, build, config.jekyll.flags.dev)
   shell.exec(`${JEKYLL_ENV} bundle exec ${build}`)
   done()
 }

@@ -13,7 +13,7 @@ jekyllDist: "website/assets"
 browsersync:
   debug: true
   notify: true
-  open: true
+  open: false
   port: 4000
   preferences:
     clicks: false
@@ -61,7 +61,7 @@ image:
 ## Jekyll build settings
 jekyll:
   flags:
-    dev: "--trace --verbose"
+    dev: "--verbose"
     prod: "--quiet"
 
 ## Project scripts
