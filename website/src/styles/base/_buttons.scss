@@ -3,6 +3,7 @@ button,
   cursor: pointer;
 }
 
+.btn,
 %btn {
   @include font($font-base, $font-family, $weight, normal);
   letter-spacing: 0.14rem;
@@ -41,7 +42,9 @@ button,
     color: v(colour-white);
     font-weight: $weight-light;
     letter-spacing: 0.17rem;
-    border: initial none initial;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
     background: linear-gradient(
       -180deg,
       v(colour-accent-light) 0%,
@@ -57,7 +60,9 @@ button,
       @include size(100%);
       box-shadow: hex2hsla(_colour(accent), 0.75) 0px 1px 30px 0px;
       opacity: 1;
-      border: initial none initial;
+      border-width: initial;
+      border-style: none;
+      border-color: initial;
       border-image: initial;
       border-radius: 8px;
       transition: opacity 0.35s ease 0s;
@@ -110,7 +115,9 @@ button,
     place-items: center;
     box-shadow: none;
     opacity: 1;
-    border: initial none initial;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
     @include padding(7px 15px);
     background: none;
     border-radius: 0px;
@@ -120,7 +127,9 @@ button,
       display: block;
       position: absolute;
       @include size(33.3%, 65%);
-      border: initial none initial;
+      border-width: initial;
+      border-style: none;
+      border-color: initial;
       border-image: initial;
       box-shadow: none;
       border-radius: 0px;
@@ -150,10 +159,18 @@ button,
       letter-spacing: 0.16rem;
     }
     @include hover {
-      color: v(colour-black);
+      color: v(colour-text);
       &::before,
       &::after {
         @include size(100%);
+      }
+      &::before {
+        border-top-color: v(colour-accent);
+        border-left-color: v(colour-accent);
+      }
+      &::after {
+        border-bottom-color: v(colour-accent);
+        border-right-color: v(colour-accent);
       }
     }
   }
@@ -162,7 +179,9 @@ button,
     align-items: center;
     color: v(colour-text);
     padding: 0px;
-    border: initial none initial;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
     background: none;
     transition: all 0.35s ease 0s;
     &--lg {

@@ -21,9 +21,9 @@
 title: Docuhyde
 email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
-    Write an awesome description for your new site here. You can edit this
-    line in _config.yml. It will appear in your document head meta (for
-    Google search results) and in your feed.xml site description.
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 lang: en-GB
@@ -40,18 +40,26 @@ destination: website/build
 # called by using 'site.author.name' and so on
 # NOTE: Don't use @ in front of your Twitter username
 author:
-    name: Your Name
-    email: your-email@example.com
-    uri: example
-    job_role: example
-    bio: me
-    twitter: "https://twitter.com/example"
-    github: "https://github.com/example"
-    pintrest: "https://www.pinterest.co.uk/example/"
-    instagram: "https://www.instagram.com/example/"
-    linkedin: "https://www.linkedin.com/in/example"
-    gitlab: "https://gitlab.com/example"
-    facebook: "https://www.facebook.com/example"
+  name: Your Name
+  email: your-email@example.com
+  uri: example
+  job_role: example
+  bio: me
+  social:
+    - media: "Twitter"
+      url: "https://twitter.com/example"
+    - media: "Github"
+      url: "https://github.com/example"
+    - media: "Pintrest"
+      url: "https://www.pinterest.co.uk/example/"
+    - media: "Instagram"
+      url: "https://www.instagram.com/example/"
+    - media: "Linkedin"
+      url: "https://www.linkedin.com/in/example"
+    - media: "Gitlab"
+      url: "https://gitlab.com/example"
+    - media: "Facebook"
+      url: "https://www.facebook.com/example"
 
 # _config.dev.yml overwrites these options when you run `gulp`
 # Hides your drafts and future posts
@@ -68,13 +76,13 @@ permalink: pretty
 # Markdown library and options
 markdown: kramdown
 kramdown:
-    input: GFM
-    auto_ids: true
-    footnote_nr: 1
-    entity_output: as_char
-    toc_levels: 1..6
-    enable_coderay: false
-    syntax_highlighter: rouge
+  input: GFM
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  enable_coderay: false
+  syntax_highlighter: rouge
 highlighter: rouge
 strict_front_matter: true
 
@@ -99,21 +107,21 @@ authorization_endpoint_url: "https://indieauth.com/auth"
 
 # reCAPTCHA keys
 reCaptcha:
-    siteKey: "6LdRBykTAAAAAFB46MnIu6ixuxwu9W1ihFF8G60Q"
-    secret: "PznnZGu3P6eTHRPLORniSq+J61YEf+A9zmColXDM5icqF49gbunH51B8+h+i2IvewpuxtA9TFoK68TuhUp/X3YKmmqhXasegHYabY50fqF9nJh9npWNhvITdkQHeaOqnFXUIwxfiEeUt49Yoa2waRR7a5LdRAP3SVM8hz0KIBT4="
+  siteKey: "6LdRBykTAAAAAFB46MnIu6ixuxwu9W1ihFF8G60Q"
+  secret: "PznnZGu3P6eTHRPLORniSq+J61YEf+A9zmColXDM5icqF49gbunH51B8+h+i2IvewpuxtA9TFoK68TuhUp/X3YKmmqhXasegHYabY50fqF9nJh9npWNhvITdkQHeaOqnFXUIwxfiEeUt49Yoa2waRR7a5LdRAP3SVM8hz0KIBT4="
 
 # Search
 search: # true, false (default)
 search_full_content: false # true, false (default)
 search_provider: # lunr (default), algolia
 algolia:
-    application_id: # YOUR_APPLICATION_ID
-    index_name: # YOUR_INDEX_NAME
-    search_only_api_key: # YOUR_SEARCH_ONLY_API_KEY
-    powered_by: # true (default), false
+  application_id: # YOUR_APPLICATION_ID
+  index_name: # YOUR_INDEX_NAME
+  search_only_api_key: # YOUR_SEARCH_ONLY_API_KEY
+  powered_by: # true (default), false
 google:
-    search_engine_id: # YOUR_SEARCH_ENGINE_ID
-    instant_search: # false (default), true
+  search_engine_id: # YOUR_SEARCH_ENGINE_ID
+  instant_search: # false (default), true
 
 # Firebase Hosting
 firebase_project: # YOUR PROJECT NAME
@@ -123,61 +131,61 @@ firebase_messagingID: # FIREBASE messagingSenderId
 
 # Collections
 collections:
-    docs:
-        output: true
-        permalink: /:collection/:path/
-        title: "Docs"
+  docs:
+    output: true
+    permalink: /:collection/:path/
+    title: "Docs"
 
 # Build settings
 plugins:
-    - jekyll-feed
-    # - jekyll-gist
-    # - jekyll-paginate
-    - jekyll-sitemap
-    - jekyll-seo-tag
-    - jekyll-include-cache
-    - jekyll-algolia
-    # - jekyll/tagging
-    # - jekyll-tagging-related_posts
+  - jekyll-feed
+  # - jekyll-gist
+  # - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-include-cache
+  - jekyll-algolia
+  # - jekyll/tagging
+  # - jekyll-tagging-related_posts
 
 include:
-    - _pages
-    - _headers
-    - _redirects
+  - _pages
+  - _headers
+  - _redirects
 
 # Eclude files from Jekyll build
 exclude:
-    - build/
-    - Gemfile
-    - Gemfile.lock
-    - node_modules
-    - vendor/bundle/
-    - vendor/cache/
-    - vendor/gems/
-    - vendor/ruby/
-    - package.json
-    - yarn-error.log
-    - yarn.lock
-    - package-lock.json
-    - .jekyll-assets-cache
-    - .sass-cache/
-    - Rakefile
-    - README.md
-    - gulpfile.js
-    - gulpfile.babel.js
-    - .babelrc
-    - markdown.style.rb
-    - .mdlrc
-    - .eslintignore
-    - .eslintrc.js
-    - .gitattributes
-    - .gitignore
-    - .editorconfig
-    - .stylelintrc.json
-    - .travis.yml
-    - .codeclimate.yml
-    - .github/
-    - netlify.toml
-    - CHANGELOG.md
-    - workbox-config.js
-    - src/
+  - build/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - package.json
+  - yarn-error.log
+  - yarn.lock
+  - package-lock.json
+  - .jekyll-assets-cache
+  - .sass-cache/
+  - Rakefile
+  - README.md
+  - gulpfile.js
+  - gulpfile.babel.js
+  - .babelrc
+  - markdown.style.rb
+  - .mdlrc
+  - .eslintignore
+  - .eslintrc.js
+  - .gitattributes
+  - .gitignore
+  - .editorconfig
+  - .stylelintrc.json
+  - .travis.yml
+  - .codeclimate.yml
+  - .github/
+  - netlify.toml
+  - CHANGELOG.md
+  - workbox-config.js
+  - src/

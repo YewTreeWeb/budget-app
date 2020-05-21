@@ -331,10 +331,10 @@
 
 /// Add retina media query.
 @mixin retina($ratio) {
-  @if map-has-key($ratios, #{2x}) or
-    map-has-key($ratios, #{1-2x}) or
-    map-has-key($ratios, #{1-3x}) or
-    map-has-key($ratios, #{1-5x})
+  @if map-has-key($ratios, #{'2x'}) or
+    map-has-key($ratios, #{'1-2x'}) or
+    map-has-key($ratios, #{'1-3x'}) or
+    map-has-key($ratios, #{'1-5x'})
   {
     $ratio: map-get($ratios, $ratio);
 
@@ -377,6 +377,15 @@
     content: '';
     width: 100%;
     padding-top: ($height / $width) * 100%;
+  }
+
+  @supports (aspect-ratio: 16 / 9) {
+    aspect-ratio: $width / $height;
+
+    &::before {
+      display: none;
+      content: none !important;
+    }
   }
 
   > .content {

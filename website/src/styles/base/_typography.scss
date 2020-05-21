@@ -48,23 +48,21 @@ pre {
 }
 
 .blockquote {
-  blockquote {
-    padding-top: 20px;
-    font-size: $font-base;
-    font-weight: $weight-exlight;
-    color: v(colour-text-secondary);
-    footer {
-      content: '';
-      display: block;
-      width: 60px;
-      @include margin(25px null 10px);
-      opacity: 0.3;
-      border-bottom: 2px solid v(colour-grey);
-      cite {
-        color: v(colour-grey);
-        opacity: 0.55;
-        font-style: normal;
-      }
+  padding-top: 20px;
+  font-size: $font-base;
+  font-weight: $weight-exlight;
+  color: v(colour-text-secondary);
+  footer {
+    content: '';
+    display: block;
+    width: 60px;
+    @include margin(25px null 10px);
+    opacity: 0.3;
+    border-bottom: 2px solid v(colour-grey);
+    cite {
+      color: v(colour-grey);
+      opacity: 0.55;
+      font-style: normal;
     }
   }
   &--boxed {
