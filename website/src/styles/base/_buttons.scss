@@ -191,4 +191,10 @@ button,
       font-size: $font-sm;
     }
   }
+  &--clear {
+    border: none;
+    background: transparent;
+    border-radius: 0;
+    @include padding(unset unset);
+  }
 }

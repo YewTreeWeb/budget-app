@@ -5,8 +5,9 @@
 $palette: (
   light: (
     1: #f9faff,
-    2: #959cb1,
-    3: #6a6f82,
+    2: #f7f7f7,
+    3: #e7e7e7,
+    4: #ccc,
   ),
   dark: (
     1: #16171b,
@@ -30,10 +31,11 @@ $palette: (
 $colours: (
   black: get-color(dark, 1),
   white: get-color(light, 1),
-  grey: get-color(light, 3),
+  grey: get-color(light, 4),
   grey-dark: get-color(dark, 3),
   grey-darker: get-color(dark, 2),
-  grey-light: get-color(light, 2),
+  grey-light: get-color(light, 3),
+  grey-lighter: get-color(light, 2),
   accent: get-color(primary, 1),
   accent-light: get-color(primary, 2),
   accent-dark: get-color(primary, 3),

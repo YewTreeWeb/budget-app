@@ -23,7 +23,7 @@
   }
   position: relative;
   width: 100%;
-  min-height: 760px;
+  height: 760px;
   background-color: v(colour-white);
   @include overlay(black, 0.4);
   &__body {

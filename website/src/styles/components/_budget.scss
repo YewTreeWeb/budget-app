@@ -2,15 +2,16 @@
   $self: &;
   &__titles {
     #{ $self }__title {
-      font-size: _heading((h3, 1));
+      font-size: _heading((h4, 1));
       font-weight: $weight-exlight;
       @include margin(0 null 10px);
     }
     #{ $self }__value {
-      font-size: _heading((h1, 1));
+      font-size: floor(_heading((h1, 1)) * 2);
       font-weight: $weight;
+      line-height: normal;
       color: #fff;
-      @include margin(25px null null);
+      @include margin(25px null 35px);
       padding: 0;
       box-sizing: border-box;
       text-align: center;
@@ -26,11 +27,65 @@
       text-transform: uppercase;
       margin: 0;
     }
+    #{ $self }__amount {
+      @include flex(center, center, row, false);
+      margin: 0;
+      font-size: _heading((h5, 1));
+    }
   }
   &__income {
     background-color: v(colour-success);
+    margin-bottom: 15px;
   }
   &__expenses {
     background-color: v(colour-accent-dark);
+  }
+}
+
+.add {
+  $self: &;
+  padding: 14px;
+  border-bottom: 1px solid v(colour-grey-light);
+  background-color: v(colour-grey-lighter);
+  &__form {
+    @include flex(center, center, row);
+    text-align: center;
+    #{ $self }__type {
+      @include size(55px, 44px);
+      border: 1px solid v(colour-grey-light);
+      font-size: _heading((h6, 1));
+      background-color: v(colour-white);
+      margin-right: 10px;
+    }
+    #{ $self }__description,
+    #{ $self }__value {
+      margin: 0;
+      box-sizing: border-box;
+      border: 1px solid v(colour-grey-light);
+      background-color: v(colour-white);
+      font-size: $font-sm;
+      @include padding(12px 15px);
+      margin-right: 10px;
+      border-radius: 5px;
+    }
+    #{ $self }__description {
+      width: 400px;
+    }
+    #{ $self }__button {
+      > svg {
+        @include size(35px, 41px);
+        color: v(colour-success);
+        &.exp {
+          color: v(colour-error);
+        }
+      }
+    }
+  }
+}
+
+.income,
+.expenses {
+  &__title {
+    text-align: center;
   }
 }

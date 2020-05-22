@@ -23,7 +23,7 @@ const UIController = (() => {
       `
       if (type === 'exp') {
         html += `
-          <div class="item-percent">21%</div>
+          <div class="item-percent">21&#37;</div>
         `
       }
       html += `

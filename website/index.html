@@ -5,16 +5,18 @@ layout: default
 {%- include hero.html -%}
 
 <!-- adding an new income/expense -->
-<section class="section container">
-  <form class="add">
-    <select class="add__type">
-        <option value="inc" selected>+</option>
-        <option value="exp">-</option>
-    </select>
-    <input type="text" class="add__description" placeholder="Add description">
-    <input type="number" class="add__value" placeholder="Value">
-    <button class="btn add__button" type="submit">{%- include svg-icon.html icon="markdown" id="tick" class="icon--tick" w="59" h="59" hidden=true -%}</button>
-  </form>
+<section class="add">
+  <div class="container">
+    <form class="add__form">
+      <select class="add__type">
+          <option value="inc" selected>+</option>
+          <option value="exp">-</option>
+      </select>
+      <input type="text" class="add__description" placeholder="Add description">
+      <input type="number" class="add__value" placeholder="Value">
+      <button class="btn btn--clear add__button" type="submit">{%- include svg-icon.html icon="check" id="check" class="icon--check" w="35" h="41" hidden=true -%}</button>
+    </form>
+  </div>
 </section>
 
 <!-- showing incomes and expenses -->

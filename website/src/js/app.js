@@ -20,7 +20,7 @@ window.onload = () => {
 // Create the main controller for the app
 const controller = ((budgetCtrl, UICtrl) => {
   const DOM = UICtrl.getDOMStrings()
-  const form = document.querySelector('.add')
+  const form = document.querySelector('.add__form')
 
   form.addEventListener('submit', (e) => {
     e.preventDefault()
