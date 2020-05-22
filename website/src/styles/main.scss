@@ -1,5 +1,7 @@
 /// Vendors
-@import '../vendors/bulma/bulma.sass';
+@import '../vendors/bulma/sass/utilities/_all.sass';
+@import '../vendors/bulma/sass/elements/container.sass';
+@import '../vendors/bulma/sass/grid/columns.sass';
 @import '../vendors/include-media/dist/include-media';
 /// Helper files.
 @import './helpers/functions';

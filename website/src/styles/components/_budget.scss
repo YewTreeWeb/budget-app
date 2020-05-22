@@ -1,0 +1,36 @@
+.budget {
+  $self: &;
+  &__titles {
+    #{ $self }__title {
+      font-size: _heading((h3, 1));
+      font-weight: $weight-exlight;
+      @include margin(0 null 10px);
+    }
+    #{ $self }__value {
+      font-size: _heading((h1, 1));
+      font-weight: $weight;
+      color: #fff;
+      @include margin(25px null null);
+      padding: 0;
+      box-sizing: border-box;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+  }
+  &__income,
+  &__expenses {
+    @include flex(center, space-between, row);
+    padding: 12px;
+    color: v(colour-white);
+    h4 {
+      text-transform: uppercase;
+      margin: 0;
+    }
+  }
+  &__income {
+    background-color: v(colour-success);
+  }
+  &__expenses {
+    background-color: v(colour-accent-dark);
+  }
+}

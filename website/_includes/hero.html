@@ -1,18 +1,31 @@
 {%- assign hero = page.hero -%}
 
-<section class="hero is-fullheight">
-  <div class="hero-body container">
-    <div class="hero-inner">
+<section class="hero{% if include.class %} {{ include.class }}{% endif %}">
+  <div class="hero__body container">
+    <div class="hero__inner">
       <h1 class="reveal-from-bottom" data-reveal-delay="150">{{ hero.title | default: site.title }}</h1>
-      {%- if hero.subtitle -%}
-        <h2>{{ hero.subtitle }}</h2>
-      {%- endif -%}
-      <p class="reveal-from-bottom" data-reveal-delay="300">{{ hero.content | default: site.description }}</p>
-      {%- if hero.button -%}
-        <div class="reveal-from-bottom hero-cta" data-reveal-delay="450">
-          <a class="btn btn--primary" href="{{ hero.button.link | default: 'javascript:void(0)' }}">{{ hero.button.text | default: "Get Started" }}</a>
+      <div class="budget">
+        <hgroup class="budget__titles">
+          <h2 class="budget__title">Available Budget in <span class="budget__month">{{ site.time | date: '%B' }}</span>:</h2>
+          <h3 class="budget__value">0.00</h3>
+        </hgroup>
+          
+        <div class="budget__income">
+          <h4>Income</h4>
+          <div class="budget__amounts">
+              <div class="budget__amount">+ 0.00</div>
+              <div class="budget__percentage">&nbsp;</div>
+          </div>
         </div>
-      {%- endif -%}
+        
+        <div class="budget__expenses">
+          <h4>Expenses</h4>
+          <div class="budget__amounts">
+            <div class="budget__amount">- 0.00</div>
+            <div class="budget__percentage">--</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

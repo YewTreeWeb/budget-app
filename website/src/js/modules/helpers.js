@@ -3,7 +3,7 @@
 /* eslint-disable no-multi-assign */
 
 // Avoid `console` errors in browsers that lack a console.
-;(() => {
+{
   let method
   const noop = () => {}
   const methods = [
@@ -43,7 +43,7 @@
       console[method] = noop
     }
   }
-})()
+}
 
 // Add tabbing indicator to window
 const handleFirstTab = (e) => {
@@ -56,9 +56,13 @@ const handleFirstTab = (e) => {
 
 window.addEventListener('keydown', handleFirstTab)
 
-// Detect if mobile or desktop.
+// Add a brower indicator to the HTML element.
+const html = document.querySelector('html')
+html.setAttribute('data-browser', browser.name)
 
-const body = document.getElementsByTagName('body')
+// Detect if mobile or desktop.
+const body = document.querySelector('body')
+
 breakpoints({
   xlarge: ['1281px', '1680px'],
   large: ['981px', '1280px'],

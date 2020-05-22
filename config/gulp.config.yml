@@ -67,7 +67,7 @@ jekyll:
 ## Project scripts
 js:
   dist: "/js"
-  src: "website/src/js/main.js"
+  src: "website/src/js/app.js"
 
 ## Project styles
 styles:

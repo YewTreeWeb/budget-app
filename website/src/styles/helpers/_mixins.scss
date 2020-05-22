@@ -97,19 +97,10 @@
   @if ($height !=null and $height !=0) {
     @if ($type== 'max') {
       max-height: $height;
-      @if ($height == 100vh) {
-        max-height: -webkit-fill-available;
-      }
     } @else if ($type== 'min') {
       min-height: $height;
-      @if ($height == 100vh) {
-        min-height: -webkit-fill-available;
-      }
     } @else {
       height: $height;
-      @if ($height == 100vh) {
-        height: -webkit-fill-available;
-      }
     }
   }
 }
@@ -679,39 +670,29 @@
 /// Display Flex
 @mixin flex($align, $justify, $direction: false, $wrap: true) {
   display: flex;
-  @if $align == 'center' and $justify == 'center' {
-    @supports not (place-items: center) {
-      align-items: $align;
-      justify-content: $justify;
+  align-items: $align;
+
+  // If space-evenly is used.
+  @if $justify== 'space-evenly' {
+    justify-content: space-between;
+
+    // Use fallback for Edge.
+    @supports (-ms-ime-align: auto) {
+      &::before,
+      &::after {
+        content: '';
+        display: block;
+      }
     }
-    @supports (place-items: center) {
-      place-items: center;
+
+    // If not Edge then apply space-evenly.
+    @supports not (-ms-ime-align: auto) {
+      // Run space-evenly.
+      justify-content: $justify;
     }
   } @else {
-    align-items: $align;
-
-    // If space-evenly is used.
-    @if $justify== 'space-evenly' {
-      justify-content: space-between;
-
-      // Use fallback for Edge.
-      @supports (-ms-ime-align: auto) {
-        &::before,
-        &::after {
-          content: '';
-          display: block;
-        }
-      }
-
-      // If not Edge then apply space-evenly.
-      @supports not (-ms-ime-align: auto) {
-        // Run space-evenly.
-        justify-content: $justify;
-      }
-    } @else {
-      // If other justify-content used.
-      justify-content: $justify;
-    }
+    // If other justify-content used.
+    justify-content: $justify;
   }
 
   @if $direction {

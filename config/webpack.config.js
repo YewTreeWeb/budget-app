@@ -55,13 +55,13 @@ module.exports = {
         },
       },
     },
-    minimize: prod ? true : false,
+    minimize: !prod,
     minimizer: [
       new TerserPlugin({
         test: /\.js(\?.*)?$/i,
         terserOptions: {
           output: {
-            comments: !prod ? true : false,
+            comments: !!prod,
           },
         },
         parallel: true,

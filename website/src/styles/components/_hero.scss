@@ -1,4 +1,5 @@
 .hero {
+  $self: &;
   @include bgImg(
     'volcano.jpg',
     center center,
@@ -22,46 +23,24 @@
   }
   position: relative;
   width: 100%;
-  min-height: -webkit-fill-available;
+  min-height: 760px;
   background-color: v(colour-white);
   @include overlay(black, 0.4);
-  .hero-body {
-    @include size(100%, calc(100% - 74px));
-    .hero-inner {
+  &__body {
+    @include size(100%);
+    #{ $self }__inner {
       -webkit-box-pack: center;
       @include flex(center, center, column);
+      @include size(100%);
       text-align: center;
       color: v(colour-white);
       @include padding(null 15px);
       @include size(670px, null, max);
       margin: 0 auto;
-      h1 {
-        order: 1;
-        margin-bottom: 25px;
-        font-size: ceil(_heading((h1, 1)) * 1.2);
-      }
-      h2 {
-        order: 0;
-        @include make-font-size(_heading(h4));
-        @include font(null, $font-family, $weight-exlight);
-        margin-bottom: 20px;
-      }
-      p {
-        order: 2;
-      }
-      .hero-cta {
-        margin-top: em(50px);
-        order: 3;
-        > a {
-          @include hover {
-            box-shadow: v(colour-accent) 0px 1px 2px 0px;
-            opacity: 0.82;
-          }
-          @include call-to-action(false) {
-            background-color: v(colour-accent-dark);
-          }
-        }
-      }
     }
+  }
+  &--fullheight {
+    @include size(null, 100vh);
+    @include size(null, 100vh, min);
   }
 }
