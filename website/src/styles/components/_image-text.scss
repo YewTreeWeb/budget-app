@@ -1,0 +1,35 @@
+.feature-layout {
+  $self: &;
+  &__image {
+    text-align: center;
+    &--shadow {
+      img {
+        box-shadow: hex2hsla(_colour(grey), 0.15) 0px 1px 30px 0px;
+        border-radius: 8px;
+        transition: box-shadow 0.35s ease 0s;
+      }
+      svg {
+        filter: drop-shadow(0px 1px 30px 0px hex2hsla(_colour(grey), 0.15));
+      }
+    }
+    img,
+    svg {
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  }
+  &__text {
+    @include flex(start, center, column);
+    h2 {
+      font-weight: $weight-exlight;
+      margin-bottom: 30px;
+    }
+    p {
+      margin-bottom: 0;
+    }
+    #{ $self }__button {
+      margin-top: 40px;
+    }
+  }
+}

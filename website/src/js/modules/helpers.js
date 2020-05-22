@@ -1,3 +1,7 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-multi-assign */
+
 // Avoid `console` errors in browsers that lack a console.
 ;(() => {
   let method
@@ -54,7 +58,7 @@ window.addEventListener('keydown', handleFirstTab)
 
 // Detect if mobile or desktop.
 
-const body = document.getElementsByTagName('body')[0]
+const body = document.getElementsByTagName('body')
 breakpoints({
   xlarge: ['1281px', '1680px'],
   large: ['981px', '1280px'],

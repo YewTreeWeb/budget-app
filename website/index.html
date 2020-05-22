@@ -1,18 +1,56 @@
 ---
 layout: default
 hero:
-  button:
-    text: "Get Started"
-    link: "#"
-  content: "Project starter kit and documentation website template made with Jekyll. Using Gulp, Webpack, SCSS/Sass, Autoprefixer, PostCSS, imagemin, Webp convertion, Browsersync, CleanCSS, Cloudinary intergration etc."
-  subtitle: "Build beautiful websites"
-  title: "Docuhyde"
-
+  content: "Lorem ipsum dolor sit amet consectetur adipisicing elit."
 ---
 {%- include hero.html -%}
 
-<section class='section container'>
-  <div class='columns'>
-    <div class='column'></div>
+<section class="section">
+  <div class="container">
+    <div class="columns column"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, voluptatum amet sed nobis assumenda, labore eveniet at laborum omnis beatae saepe, dignissimos consectetur! Labore voluptas quibusdam, repudiandae facilis cupiditate error.</p></div>
   </div>
 </section>
+
+{%- if site.author -%}
+  {%- assign author = site.author -%}
+  {%- assign authorImg = author.image -%}
+  <section class="section container">
+    <div class="columns is-multiline is-tablet author">
+      <div class="column is-12"><h2>Author</h2></div>
+      <div class="column is-5 is-offset-1">
+        {%- if authorImg.src -%}
+          {%- assign fileType = authorImg.src | split: '.' -%}
+          {%- assign fileType = fileType[1] -%}
+          {%- if fileType != 'svg' and fileType != 'gif' -%}
+            <picture>
+              <source type="image/webp" srcset="{{ authorImg.src | remove: '.jpg' | remove: '.png' | prepend: '/assets/images/' }}.webp">
+              <source type="image/jpg" srcset="{{ authorImg.src | prepend: '/assets/images/' }}">
+              <img class="author__image" src="{{ authorImg.src | prepend: '/assets/images/' }}" alt="{{ authorImg.alt }}">
+            </picture>
+          {%- else -%}
+            <img class="author__image" src="{{ authorImg.src | prepend: '/assets/images/' }}" alt="{{ authorImg.alt }}">
+          {%- endif -%}
+        {%- else -%}
+          <img class="author__image" src="/assets/images/avatar.svg" alt="A human standing within a circle.">
+        {%- endif -%}
+      </div>
+      <div class="column is-5 reveal-from-bottom">
+        <article class="author__details">
+          <h3 class="author__name">Hello I'm {{ author.name }}</h3>
+          {%- if author.job_role -%}
+            <p class="author__role">{{ author.job_role }}</p>
+          {%- endif -%}
+          <hr>
+          <blockquote class="author__bio blockquote">{{ author.bio }}</blockquote>
+          {%- if author.social -%}
+            <ul class="author__social">
+              {%- for item in author.social -%}
+                <li id="{{ item.media | lowercase }}"><a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.media }}</a></li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </article>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
