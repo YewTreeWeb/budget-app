@@ -19,15 +19,21 @@ const UIController = (() => {
       html = `
       <li class='${item}__item' id='${type}-${obj.id}'>
         <div class='item-desc'>${obj.desc}</div>
-        <div class='item-value'>${obj.val}</div>
       `
       if (type === 'exp') {
         html += `
-          <div class="item-percent">21&#37;</div>
+          <div class="item-percent">0&#37;</div>
         `
       }
       html += `
-        <button class='btn btn--sm item-del'>Delete</button>
+        <div class="items">
+          <div class='items__value'>&pound;${obj.val}</div>
+          <button class='btn btn--clear items__del'>
+            <svg id="delete" class="icon" width="20" height="20" aria-hidden="true">
+              <use xlink:href="/assets/images/icons.svg#icon-delete"></use>
+            </svg>
+          </button>
+        </div>
       </li>
       `
       // Insert HTML into the DOM

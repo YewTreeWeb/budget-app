@@ -19,7 +19,7 @@ const budgetController = (() => {
   }
 
   return {
-    addItem: (type, desc, val) => {
+    addItem(type, desc, val) {
       // Create new ID
       const ID =
         data.allItems[type].length > 0

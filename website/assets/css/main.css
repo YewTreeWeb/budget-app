@@ -557,7 +557,7 @@ button,
 
 .btn
 {
-    font-family: 'Source Sans Pro', system-ui, sans-serif;
+    font-family: 'Poppins', system-ui, sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: normal;
@@ -583,7 +583,7 @@ button,
 
     opacity: 1;
     color: var(--colour-white);
-    border: 1px solid var(--colour-accent-light);
+    border: 1px solid var(--colour-secondary);
     border-radius: 8px;
     -o-border-image: initial;
        border-image: initial;
@@ -597,7 +597,7 @@ button,
 .btn--lg
 {
     font-size: 17px;
-    font-weight: 700;
+    font-weight: 600;
 
     padding: 13px 48px;
 
@@ -665,8 +665,7 @@ button,
     border-width: initial;
     border-style: none;
     border-color: initial;
-    background: -webkit-gradient(linear, left top, left bottom, from(var(--colour-accent-light)), to(var(--colour-accent-dark)));
-    background: linear-gradient(-180deg, var(--colour-accent-light) 0%, var(--colour-accent-dark) 100%);
+    background: var(--colour-accent);
 }
 
 .btn--modern:before
@@ -691,8 +690,8 @@ button,
     border-radius: 8px;
     -o-border-image: initial;
        border-image: initial;
-    -webkit-box-shadow: hsla(335.625deg, 100%, 68.627451%, .75) 0 1px 30px 0;
-            box-shadow: hsla(335.625deg, 100%, 68.627451%, .75) 0 1px 30px 0;
+    -webkit-box-shadow: hsla(337.664234deg, 56.378601%, 47.647059%, .75) 0 1px 30px 0;
+            box-shadow: hsla(337.664234deg, 56.378601%, 47.647059%, .75) 0 1px 30px 0;
 
     -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
 }
@@ -791,7 +790,7 @@ button,
         .btn--ghost:hover
         {
             color: var(--colour-white);
-            background: var(--colour-accent-dark);
+            background: var(--colour-accent);
         }
     }
 
@@ -801,7 +800,7 @@ button,
         .btn--ghost:active
         {
             color: var(--colour-white);
-            background: var(--colour-accent-dark);
+            background: var(--colour-accent);
         }
     }
 }
@@ -811,7 +810,7 @@ button,
     .btn--ghost:hover
     {
         color: var(--colour-white);
-        background: var(--colour-accent-dark);
+        background: var(--colour-accent);
     }
 }
 
@@ -1037,8 +1036,7 @@ button,
     background: transparent;
 }
 
-:root,
-[data-theme='light']
+:root
 {
     --colour-black: hsl(228deg, 10.204082%, 9.607843%);
     --colour-white: hsl(230deg, 100%, 98.823529%);
@@ -1047,24 +1045,13 @@ button,
     --colour-grey-darker: hsl(230deg, 9.677419%, 12.156863%);
     --colour-grey-light: hsl(0deg, 0%, 90.588235%);
     --colour-grey-lighter: hsl(0deg, 0%, 96.862745%);
-    --colour-accent: hsl(335.625deg, 100%, 68.627451%);
-    --colour-accent-light: hsl(335.779817deg, 100%, 78.627451%);
-    --colour-accent-dark: hsl(335.545024deg, 100%, 58.627451%);
-    --colour-error: hsl(335.625deg, 100%, 68.627451%);
-    --colour-warning: hsl(38.909091deg, 100%, 67.647059%);
-    --colour-success: hsl(164.907975deg, 73.09417%, 43.72549%);
-    --colour-primary: hsl(230deg, 100%, 98.823529%);
-    --colour-secondary: hsl(0deg, 0%, 96.862745%);
+    --colour-primary: hsl(7.5deg, 16%, 29.411765%);
+    --colour-secondary: hsl(8.275862deg, 18.471338%, 69.215686%);
     --colour-text: hsl(230deg, 9.677419%, 12.156863%);
     --colour-text-secondary: hsl(0deg, 0%, 90.588235%);
-}
-
-[data-theme='dark']
-{
-    --colour-primary: hsl(228deg, 10.204082%, 9.607843%);
-    --colour-secondary: hsl(230deg, 9.677419%, 12.156863%);
-    --colour-text: hsl(230deg, 100%, 98.823529%);
-    --colour-text-secondary: hsl(0deg, 0%, 96.862745%);
+    --colour-accent: hsl(337.664234deg, 56.378601%, 47.647059%);
+    --colour-error: hsl(0deg, 64.016736%, 53.137255%);
+    --colour-success: hsl(81.940299deg, 57.758621%, 45.490196%);
 }
 
 form p
@@ -1076,7 +1063,7 @@ form input,
 form textarea,
 form select
 {
-    font-family: 'Source Sans Pro', system-ui, sans-serif;
+    font-family: 'Poppins', system-ui, sans-serif;
     font-size: 18px;
     font-weight: 300;
     line-height: 1;
@@ -1103,9 +1090,9 @@ form textarea
 form input.focus-visible,
 form textarea.focus-visible
 {
-    border-color: var(--colour-accent);
-    -webkit-box-shadow: hsla(335.625deg, 100%, 68.627451%, .2) 0 5px 10px;
-            box-shadow: hsla(335.625deg, 100%, 68.627451%, .2) 0 5px 10px;
+    border-color: var(--colour-secondary);
+    -webkit-box-shadow: hsla(8.275862deg, 18.471338%, 69.215686%, .2) 0 5px 10px;
+            box-shadow: hsla(8.275862deg, 18.471338%, 69.215686%, .2) 0 5px 10px;
 }
 
 @supports (hover: hover)
@@ -1114,18 +1101,18 @@ form textarea.focus-visible
     {
         form select:hover
         {
-            border-color: var(--colour-accent);
-            -webkit-box-shadow: hsla(335.625deg, 100%, 68.627451%, .2) 0 5px 10px;
-                    box-shadow: hsla(335.625deg, 100%, 68.627451%, .2) 0 5px 10px;
+            border-color: var(--colour-secondary);
+            -webkit-box-shadow: hsla(8.275862deg, 18.471338%, 69.215686%, .2) 0 5px 10px;
+                    box-shadow: hsla(8.275862deg, 18.471338%, 69.215686%, .2) 0 5px 10px;
         }
     }
 
     form select:active,
     form select:focus
     {
-        border-color: var(--colour-accent);
-        -webkit-box-shadow: hsla(335.625deg, 100%, 68.627451%, .2) 0 5px 10px;
-                box-shadow: hsla(335.625deg, 100%, 68.627451%, .2) 0 5px 10px;
+        border-color: var(--colour-secondary);
+        -webkit-box-shadow: hsla(8.275862deg, 18.471338%, 69.215686%, .2) 0 5px 10px;
+                box-shadow: hsla(8.275862deg, 18.471338%, 69.215686%, .2) 0 5px 10px;
     }
 }
 
@@ -1135,9 +1122,9 @@ form textarea.focus-visible
     form select:active,
     form select:focus
     {
-        border-color: var(--colour-accent);
-        -webkit-box-shadow: hsla(335.625deg, 100%, 68.627451%, .2) 0 5px 10px;
-                box-shadow: hsla(335.625deg, 100%, 68.627451%, .2) 0 5px 10px;
+        border-color: var(--colour-secondary);
+        -webkit-box-shadow: hsla(8.275862deg, 18.471338%, 69.215686%, .2) 0 5px 10px;
+                box-shadow: hsla(8.275862deg, 18.471338%, 69.215686%, .2) 0 5px 10px;
     }
 }
 
@@ -1157,7 +1144,7 @@ html
 html,
 body
 {
-    background-color: var(--colour-primary);
+    background-color: var(--colour-white);
 }
 
 *,
@@ -1606,7 +1593,7 @@ a.strikethrough:before
     {
         a.strikethrough:hover
         {
-            color: hsla(335.625deg, 100%, 68.627451%, .6);
+            color: hsla(337.664234deg, 56.378601%, 47.647059%, .6);
         }
 
         a.strikethrough:hover:before
@@ -1623,7 +1610,7 @@ a.strikethrough:before
         a.strikethrough:focus,
         a.strikethrough:active
         {
-            color: hsla(335.625deg, 100%, 68.627451%, .6);
+            color: hsla(337.664234deg, 56.378601%, 47.647059%, .6);
         }
 
         a.strikethrough:focus:before,
@@ -1641,7 +1628,7 @@ a.strikethrough:before
 {
     a.strikethrough:hover
     {
-        color: hsla(335.625deg, 100%, 68.627451%, .6);
+        color: hsla(337.664234deg, 56.378601%, 47.647059%, .6);
     }
 
     a.strikethrough:hover:before
@@ -1687,7 +1674,7 @@ a.highlight:before
             -webkit-transform: scaleY(1);
                     transform: scaleY(1);
 
-            background-color: hsla(335.625deg, 100%, 68.627451%, .75);
+            background-color: hsla(337.664234deg, 56.378601%, 47.647059%, .75);
         }
     }
 
@@ -1699,7 +1686,7 @@ a.highlight:before
             -webkit-transform: scaleY(1);
                     transform: scaleY(1);
 
-            background-color: hsla(335.625deg, 100%, 68.627451%, .75);
+            background-color: hsla(337.664234deg, 56.378601%, 47.647059%, .75);
         }
     }
 }
@@ -1711,7 +1698,7 @@ a.highlight:before
         -webkit-transform: scaleY(1);
                 transform: scaleY(1);
 
-        background-color: hsla(335.625deg, 100%, 68.627451%, .75);
+        background-color: hsla(337.664234deg, 56.378601%, 47.647059%, .75);
     }
 }
 
@@ -1944,7 +1931,7 @@ img.lazyload:not([src])
 
 body
 {
-    font-family: 'Source Sans Pro', system-ui, sans-serif;
+    font-family: 'Poppins', system-ui, sans-serif;
     font-size: 16px;
     font-weight: 400;
 
@@ -1959,7 +1946,7 @@ p
 
 h1
 {
-    font-family: 'Fira Sans', system-ui, sans-serif;
+    font-family: 'Roboto Condensed', system-ui, sans-serif;
     font-size: 54px;
     font-weight: 400;
     line-height: unset;
@@ -1967,7 +1954,7 @@ h1
 
 h2
 {
-    font-family: 'Fira Sans', system-ui, sans-serif;
+    font-family: 'Roboto Condensed', system-ui, sans-serif;
     font-size: 38px;
     font-weight: 400;
     line-height: 48px;
@@ -1975,7 +1962,7 @@ h2
 
 h3
 {
-    font-family: 'Fira Sans', system-ui, sans-serif;
+    font-family: 'Roboto Condensed', system-ui, sans-serif;
     font-size: 32px;
     font-weight: 400;
     line-height: 42px;
@@ -1983,7 +1970,7 @@ h3
 
 h4
 {
-    font-family: 'Fira Sans', system-ui, sans-serif;
+    font-family: 'Roboto Condensed', system-ui, sans-serif;
     font-size: 24px;
     font-weight: 400;
     line-height: 34px;
@@ -1993,7 +1980,7 @@ h4
 
 h5
 {
-    font-family: 'Fira Sans', system-ui, sans-serif;
+    font-family: 'Roboto Condensed', system-ui, sans-serif;
     font-size: 20px;
     font-weight: 400;
     line-height: 32px;
@@ -2003,7 +1990,7 @@ h5
 
 h6
 {
-    font-family: 'Fira Sans', system-ui, sans-serif;
+    font-family: 'Roboto Condensed', system-ui, sans-serif;
     font-size: 18px;
     font-weight: 400;
     line-height: 30px;
@@ -2177,8 +2164,9 @@ ol.no-style
 
 .budget__titles .budget__title
 {
+    font-family: 'Poppins', system-ui, sans-serif;
     font-size: 24px;
-    font-weight: 200;
+    font-weight: 300;
 
     margin-top: 0;
     margin-bottom: 10px;
@@ -2267,7 +2255,7 @@ ol.no-style
 
 .budget__expenses
 {
-    background-color: var(--colour-accent-dark);
+    background-color: var(--colour-error);
 }
 
 .add
@@ -2347,7 +2335,108 @@ ol.no-style
 .income__title,
 .expenses__title
 {
+    margin-top: unset;
+
     text-align: center;
+}
+
+.income__list,
+.expenses__list
+{
+    padding-left: 0;
+
+    list-style: none;
+}
+
+.income__list > li,
+.expenses__list > li
+{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    margin: 0;
+    padding: 13px;
+
+    border-bottom: 1px solid var(--colour-grey-light);
+
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
+}
+
+.income__list > li:first-child,
+.expenses__list > li:first-child
+{
+    border-top: 1px solid var(--colour-grey-light);
+}
+
+.income__list > li .item-desc,
+.expenses__list > li .item-desc
+{
+    line-height: normal;
+}
+
+.income__list > li .items,
+.expenses__list > li .items
+{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
+}
+
+.income__list > li .items__value,
+.expenses__list > li .items__value
+{
+    font-weight: 600;
+    line-height: normal;
+}
+
+.income__list > li .items__del,
+.expenses__list > li .items__del
+{
+    line-height: normal;
+
+    height: 20px;
+}
+
+.income__list > li .items__del > svg,
+.expenses__list > li .items__del > svg
+{
+    width: 20px;
+    height: 20px;
+}
+
+.income .items__value,
+.income .items__del > svg
+{
+    color: var(--colour-success);
+}
+
+.expenses .items__value,
+.expenses .items__del > svg
+{
+    color: var(--colour-error);
 }
 
 .hero
@@ -2531,7 +2620,7 @@ ol.no-style
 .post__content h3
 {
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 600;
 
     margin-bottom: 0;
 }

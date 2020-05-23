@@ -17,7 +17,7 @@ button,
   white-space: nowrap;
   vertical-align: middle;
   user-select: none;
-  border: 1px solid v(colour-accent-light);
+  border: 1px solid v(colour-secondary);
   border-image: initial;
   border-radius: 8px;
   background-color: v(colour-accent);
@@ -45,11 +45,7 @@ button,
     border-width: initial;
     border-style: none;
     border-color: initial;
-    background: linear-gradient(
-      -180deg,
-      v(colour-accent-light) 0%,
-      v(colour-accent-dark) 100%
-    );
+    background: v(colour-accent);
     @include padding(12px 40px);
     &::before {
       content: '';
@@ -102,7 +98,7 @@ button,
     }
     @include hover {
       color: v(colour-white);
-      background: v(colour-accent-dark);
+      background: v(colour-accent);
     }
   }
   &--rounded {

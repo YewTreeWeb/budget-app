@@ -16,17 +16,15 @@ Google: false
 Local:
   - src: fira-code-v8-latin-regular
     type: "woff2"
-  - src: fira-sans-v10-latin-regular
+  - src: roboto-condensed-v18-regular
     type: "woff2"
-  - src: fira-sans-v10-latin-600
+  - src: poppins-v9-latin-200
     type: "woff2"
-  - src: source-sans-pro-v13-latin-200
+  - src: poppins-v9-latin-300
     type: "woff2"
-  - src: source-sans-pro-v13-latin-300
+  - src: poppins-v9-latin-400
     type: "woff2"
-  - src: source-sans-pro-v13-latin-400
+  - src: poppins-v9-latin-600
     type: "woff2"
-  - src: source-sans-pro-v13-latin-600
-    type: "woff2"
-  - src: source-sans-pro-v13-latin-900
+  - src: poppins-v9-latin-900
     type: "woff2"

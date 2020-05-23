@@ -2,8 +2,7 @@
   $self: &;
   &__titles {
     #{ $self }__title {
-      font-size: _heading((h4, 1));
-      font-weight: $weight-exlight;
+      @include font(_heading((h4, 1)), $font-family, $weight-light);
       @include margin(0 null 10px);
     }
     #{ $self }__value {
@@ -38,7 +37,7 @@
     margin-bottom: 15px;
   }
   &__expenses {
-    background-color: v(colour-accent-dark);
+    background-color: v(colour-error);
   }
 }
 
@@ -85,7 +84,58 @@
 
 .income,
 .expenses {
+  $self: &;
   &__title {
     text-align: center;
+    margin-top: unset;
+  }
+  &__list {
+    list-style: none;
+    padding-left: 0;
+    > li {
+      @include flex(center, space-between, row);
+      margin: 0;
+      box-sizing: border-box;
+      padding: 13px;
+      border-bottom: 1px solid v(colour-grey-light);
+      &:first-child {
+        border-top: 1px solid v(colour-grey-light);
+      }
+      .item-desc {
+        line-height: normal;
+      }
+      .items {
+        @include flex(center, flex-end, row);
+        &__value {
+          font-weight: $weight-heavy;
+          line-height: normal;
+        }
+        &__del {
+          line-height: normal;
+          @include size(null, 20px);
+          > svg {
+            @include size(20px);
+          }
+        }
+      }
+    }
+  }
+}
+
+.income {
+  .items {
+    &__value,
+    &__del > svg {
+      color: v(colour-success);
+    }
+  }
+}
+
+.expenses {
+  .items {
+    &__value,
+    &__del > svg {
+      color: v(colour-error);
+    }
   }
 }

@@ -15,68 +15,54 @@
   true
 );
 @include font-face(
-  Fira Sans,
-  '/assets/fonts/fira-sans-v10-latin-regular',
-  'Fira Sans Regular' 'FiraSans-Regular',
+  Roboto Condensed,
+  '/assets/fonts/roboto-condensed-v18-latin-regular',
+  'Roboto Condensed' 'RobotoCondensed-Regular',
   400,
   normal,
   swap,
   true
 );
 @include font-face(
-  Fira Sans,
-  '/assets/fonts/fira-sans-v10-latin-600',
-  'Fira Sans SemiBold' 'FiraSans-SemiBold',
-  600,
-  normal,
-  swap,
-  true
-);
-@include font-face(
-  Source Sans Pro,
-  '/assets/fonts/source-sans-pro-v13-latin-200',
-  'Source Sans Pro ExtraLight' 'SourceSansPro-ExtraLight',
+  Poppins,
+  '/assets/fonts/poppins-v9-latin-200',
+  'Poppins ExtraLight' 'Poppins-ExtraLight',
   200,
   normal,
   swap,
   true
 );
 @include font-face(
-  Source Sans Pro,
-  '/assets/fonts/source-sans-pro-v13-latin-300',
-  'Source Sans Pro Light' 'SourceSansPro-Light',
+  Poppins,
+  '/assets/fonts/poppins-v9-latin-300',
+  'Poppins Light' 'Poppins-Light',
   300,
   normal,
   swap,
   true
 );
 @include font-face(
-  Source Sans Pro,
-  '/assets/fonts/source-sans-pro-v13-latin-regular',
-  'Source Sans Pro Regular' 'SourceSansPro-Regular'
-);
-@include font-face(
-  Source Sans Pro,
-  '/assets/fonts/source-sans-pro-v13-latin-italic',
-  'Source Sans Pro Italic' 'SourceSansPro-Italic',
+  Poppins,
+  '/assets/fonts/poppins-v9-latin-regular',
+  'Poppins Regular' 'Poppins-Regular',
   400,
-  italic,
+  normal,
   swap,
   true
 );
 @include font-face(
-  Source Sans Pro,
-  '/assets/fonts/source-sans-pro-v13-latin-600',
-  'Source Sans Pro SemiBold' 'SourceSansPro-SemiBold',
+  Poppins,
+  '/assets/fonts/poppins-v9-latin-600',
+  'Poppins SemiBold' 'Poppins-SemiBold',
   600,
   normal,
   swap,
   true
 );
 @include font-face(
-  Source Sans Pro,
-  '/assets/fonts/source-sans-pro-v13-latin-900',
-  'Source Sans Pro Black' 'SourceSansPro-Black',
+  Poppins,
+  '/assets/fonts/poppins-v9-latin-900',
+  'Poppins Black' 'Poppins-Black',
   900,
   normal,
   swap,

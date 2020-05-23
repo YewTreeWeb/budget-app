@@ -1,17 +1,6 @@
 /// Normal & Light mode.
-:root,
-[data-theme='light'] {
-	@each $name, $colour in $colours {
-		--colour-#{$name}: #{hex2hsl($colour)};
-	}
-	@each $name, $colour in $light-colours {
-		--colour-#{$name}: #{hex2hsl($colour)};
-	}
-}
-
-/// Dark mode.
-[data-theme='dark'] {
-	@each $name, $colour in $dark-colours {
-		--colour-#{$name}: #{hex2hsl($colour)};
-	}
+:root {
+  @each $name, $colour in $colours {
+    --colour-#{$name}: #{hex2hsl($colour)};
+  }
 }

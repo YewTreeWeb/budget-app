@@ -15,15 +15,13 @@ $palette: (
     3: #292b32,
   ),
   primary: (
-    1: #ff5fa0,
-    2: #ff92be,
-    3: #ff2c82,
-    4: #ffe7f1,
+    1: #57423f,
+    2: #bfa6a2,
+    3: #be3568,
   ),
   alert: (
-    error: #ff5fa0,
-    warning: #ffc55a,
-    success: #1ec198,
+    error: #d43b3b,
+    success: #86b731,
   ),
 );
 
@@ -36,33 +34,18 @@ $colours: (
   grey-darker: get-color(dark, 2),
   grey-light: get-color(light, 3),
   grey-lighter: get-color(light, 2),
-  accent: get-color(primary, 1),
-  accent-light: get-color(primary, 2),
-  accent-dark: get-color(primary, 3),
+  primary: get-color(primary, 1),
+  secondary: get-color(primary, 2),
+  text: get-color(dark, 2),
+  text-secondary: get-color(light, 3),
+  accent: get-color(primary, 3),
   error: get-color(alert, error),
-  warning: get-color(alert, warning),
   success: get-color(alert, success),
 ) !default;
 
-// Light mode colours.
-$light-colours: (
-  primary: get-color(light, 1),
-  secondary: get-color(light, 2),
-  text: get-color(dark, 2),
-  text-secondary: get-color(light, 3),
-);
-
-// Dark mode colours.
-$dark-colours: (
-  primary: get-color(dark, 1),
-  secondary: get-color(dark, 2),
-  text: get-color(light, 1),
-  text-secondary: get-color(light, 2),
-);
-
 /// Font
-$font-family: quote(Source Sans Pro), system-ui, sans-serif !default;
-$font-family-header: quote(Fira Sans), system-ui, sans-serif;
+$font-family: quote(Poppins), system-ui, sans-serif !default;
+$font-family-header: quote(Roboto Condensed), system-ui, sans-serif;
 $font-family-code: quote(Fira Code), Monaco, Consolas, quote(Andale Mono),
   quote(DejaVu Sans Mono), monospace !default;
 $font-family-pre: quote(Courier 10 Pitch), Courier, monospace !default;
@@ -108,5 +91,5 @@ $font-xs: 12px;
 $weight: 400;
 $weight-exlight: 200;
 $weight-light: 300;
-$weight-heavy: 700;
+$weight-heavy: 600;
 $weight-exheavy: 900;

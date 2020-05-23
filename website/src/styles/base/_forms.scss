@@ -16,14 +16,14 @@ form {
   textarea {
     @include size(232px, 48px, min);
     &.focus-visible {
-      border-color: v(colour-accent);
-      box-shadow: hex2hsla(_colour(accent), 0.2) 0px 5px 10px;
+      border-color: v(colour-secondary);
+      box-shadow: hex2hsla(_colour(secondary), 0.2) 0px 5px 10px;
     }
   }
   select {
     @include call-to-action {
-      border-color: v(colour-accent);
-      box-shadow: hex2hsla(_colour(accent), 0.2) 0px 5px 10px;
+      border-color: v(colour-secondary);
+      box-shadow: hex2hsla(_colour(secondary), 0.2) 0px 5px 10px;
     }
   }
 }
