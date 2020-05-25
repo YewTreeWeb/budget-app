@@ -83,3 +83,11 @@ if (browser.mobile) {
     body.classList.add('is-mobile')
   })
 }
+
+// Log if running in localhost when in development mode.
+if (
+  window.location.hostname === 'localhost' &&
+  process.env.NODE_ENV !== 'production'
+) {
+  console.log('localhost detected!')
+}

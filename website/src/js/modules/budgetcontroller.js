@@ -35,6 +35,17 @@ const budgetController = (() => {
       // create new item
       return newItem
     },
+    calculate(type, value) {
+      let calc
+      if (type === 'exp') {
+        calc = data.totals[type] - Number(value)
+      } else {
+        calc = data.totals[type] + Number(value)
+      }
+
+      data.totals[type] = calc
+      return data.totals[type]
+    },
   }
 })()
 

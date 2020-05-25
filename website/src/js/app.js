@@ -19,20 +19,24 @@ window.onload = () => {
 
 // Create the main controller for the app
 // eslint-disable-next-line no-unused-vars
-const controller = ((budgetCtrl, UICtrl) => {
-  const DOM = UICtrl.getDOMStrings()
+const controller = ((budgetCtrl) => {
   const form = document.querySelector('.add__form')
   const type = document.querySelector('.add__type')
+  const desc = document.querySelector('.add__description')
+  const value = document.querySelector('.add__value')
   const check = document.querySelector('#check')
 
+  const UICtrl = new UIController(type, desc, value)
+
+  // Toggle the submit new cost from either income or expense.
   type.addEventListener('change', (e) => {
     console.log(e)
     const options = Array.from(type.options)
     console.log(options)
     if (type.value === 'exp') {
       check.classList.add(type.value)
-      type.options[0].removeAttribute('selected')
-      type.options.selectedIndex.setAttribute('selected')
+      // type.options[0].removeAttribute('selected')
+      // type.options.selectedIndex.setAttribute('selected')
     } else {
       // options[1].removeAttribute('selected')
       // options[0].setAttribute('selected')
@@ -54,9 +58,10 @@ const controller = ((budgetCtrl, UICtrl) => {
     )
 
     // Add item to the UI
-    UICtrl.addListItem(newItem, input.type)
+    UICtrl.render(newItem, input.type)
 
     // Calculate the budget
+    const calc = budgetController.calculate(input.type, input.value)
 
     // Update the UI
 
@@ -65,6 +70,7 @@ const controller = ((budgetCtrl, UICtrl) => {
       console.log('form submitted!')
       console.log(input)
       console.log(newItem)
+      console.log(calc)
     }
   })
-})(budgetController, UIController)
+})(budgetController)
