@@ -2258,6 +2258,27 @@ ol.no-style
     background-color: var(--colour-error);
 }
 
+.budget__percentage
+{
+    font-size: 17px;
+    font-weight: 200;
+
+    margin-left: 5px;
+    padding: 3px 6px;
+
+    opacity: 0;
+    background-color: hsla(0deg, 64.016736%, 68.137255%, 50%);
+
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+}
+
+.budget__percentage.show
+{
+    opacity: 1;
+
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
+}
+
 .add
 {
     padding: 14px;

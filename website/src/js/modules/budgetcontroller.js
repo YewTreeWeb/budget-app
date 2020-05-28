@@ -16,10 +16,11 @@ const budgetController = (() => {
       exp: 0,
       inc: 0,
     },
+    budget: 0,
   }
 
   return {
-    addItem(type, desc, val) {
+    addItem: (type, desc, val) => {
       // Create new ID
       const ID =
         data.allItems[type].length > 0
@@ -35,16 +36,40 @@ const budgetController = (() => {
       // create new item
       return newItem
     },
-    calculate(type, value) {
-      let calc
-      if (type === 'exp') {
-        calc = data.totals[type] - Number(value)
+    calculateBudget: (type) => {
+      // 1. Calculate the budget
+      let sum = 0
+      data.allItems[type].forEach((cur) => {
+        sum += cur.val
+      })
+      data.totals[type] = sum
+
+      // 2. Calculate the budget: income - expenses
+      data.budget = data.totals.inc - data.totals.exp
+
+      // 3. Calculate the percentage of income that we spent
+      if (data.totals.inc > 0) {
+        data.percent = Math.round((data.totals.exp / data.totals.inc) * 100)
       } else {
-        calc = data.totals[type] + Number(value)
+        data.percent = -1
       }
 
-      data.totals[type] = calc
-      return data.totals[type]
+      // 3. Return the budget
+      if (process.env.NODE_ENV !== 'production') {
+        console.log(data.totals.exp, data.totals.inc)
+        console.log(data.budget, data.percent)
+      }
+      return data
+    },
+    removeItem: (type, id) => {
+      const ids = data.allItems[type].map((current) => {
+        return current.id
+      })
+      const index = ids.indexOf(id)
+
+      if (index !== -1) {
+        data.allItems[type].splice(index, 1)
+      }
     },
   }
 })()

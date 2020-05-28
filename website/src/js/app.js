@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
 
 // External
@@ -49,28 +50,36 @@ const controller = ((budgetCtrl) => {
 
     // Get filed input data
     const input = UICtrl.getInput()
-
-    // Add the item to the budget
-    const newItem = budgetCtrl.addItem(
-      input.type,
-      input.description,
-      input.value
-    )
-
-    // Add item to the UI
-    UICtrl.render(newItem, input.type)
-
-    // Calculate the budget
-    const calc = budgetController.calculate(input.type, input.value)
-
-    // Update the UI
-
-    form.reset()
     if (process.env.NODE_ENV !== 'production') {
-      console.log('form submitted!')
       console.log(input)
-      console.log(newItem)
-      console.log(calc)
+      console.log(typeof input.value)
+    }
+
+    // Clear the form fields
+    form.reset()
+
+    // Only run calculations if valid inputs are entered
+    if (input.desc !== '' && !isNaN(input.value) && input.value > 0) {
+      // Add the item to the budget
+      const newItem = budgetCtrl.addItem(
+        input.type,
+        input.description,
+        input.value
+      )
+
+      // Calculate the budget
+      const budget = budgetCtrl.calculateBudget(input.type)
+
+      // Update the UI
+      UICtrl.render(newItem, input.type) // Add items to income or expenses list
+      UICtrl.updateBudget(input.type, budget) // Output the new budget
+      UICtrl.deleteItem() // Delete an added income or expense
+
+      if (process.env.NODE_ENV !== 'production') {
+        console.log('form submitted!')
+        console.log(newItem)
+        console.log(budget)
+      }
     }
   })
 })(budgetController)

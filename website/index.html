@@ -13,7 +13,7 @@ layout: default
           <option value="exp">-</option>
       </select>
       <input type="text" class="add__description" placeholder="Add description">
-      <input type="number" class="add__value" placeholder="Value">
+      <input type="number" class="add__value" placeholder="Value" step=".01">
       <button class="btn btn--clear add__button" type="submit">{%- include svg-icon.html icon="check" id="check" class="icon--check" w="35" h="41" hidden=true -%}</button>
     </form>
   </div>
@@ -21,7 +21,7 @@ layout: default
 
 <!-- showing incomes and expenses -->
 <section class='section container'>
-  <div class='columns'>
+  <div class='columns income-expenses'>
     <div class="column income">
       <h2 class="income__title">Income</h2>
       <ul class="income__list"></ul>
