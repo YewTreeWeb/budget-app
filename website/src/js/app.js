@@ -67,19 +67,18 @@ const controller = ((budgetCtrl) => {
         input.value
       )
 
-      // Calculate the budget
-      const budget = budgetCtrl.calculateBudget(input.type)
-
-      // Update the UI
+      // Calculae the budget and update the UI
       UICtrl.render(newItem, input.type) // Add items to income or expenses list
-      UICtrl.updateBudget(input.type, budget) // Output the new budget
-      UICtrl.deleteItem() // Delete an added income or expense
+      UICtrl.updateBudget() // Output the new budget
+      UICtrl.updatePercentages() // Output the new percentages
 
       if (process.env.NODE_ENV !== 'production') {
         console.log('form submitted!')
         console.log(newItem)
-        console.log(budget)
       }
     }
   })
+
+  // Delete an added income or expense
+  UICtrl.deleteItem()
 })(budgetController)

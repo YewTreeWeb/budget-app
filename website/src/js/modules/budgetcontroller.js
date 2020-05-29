@@ -4,6 +4,25 @@ const budgetController = (() => {
       this.id = id
       this.desc = description
       this.val = value
+      this.percentage = -1
+    }
+
+    calcPercentage(totalIncome) {
+      if (totalIncome > 0) {
+        this.percentage = Math.round((this.val / totalIncome) * 100)
+      } else {
+        this.percentage = -1
+      }
+      if (process.env.NODE_ENV !== 'production') {
+        console.log(
+          `this value is ${typeof this.val}`,
+          `the totalIncome ${typeof totalIncome}`
+        )
+      }
+    }
+
+    getPercentage() {
+      return this.percentage
     }
   }
 
@@ -17,6 +36,14 @@ const budgetController = (() => {
       inc: 0,
     },
     budget: 0,
+  }
+
+  const calculateTotals = (type) => {
+    let sum = 0
+    data.allItems[type].forEach((cur) => {
+      sum += cur.val
+    })
+    data.totals[type] = sum
   }
 
   return {
@@ -36,13 +63,10 @@ const budgetController = (() => {
       // create new item
       return newItem
     },
-    calculateBudget: (type) => {
+    calculateBudget: () => {
       // 1. Calculate the budget
-      let sum = 0
-      data.allItems[type].forEach((cur) => {
-        sum += cur.val
-      })
-      data.totals[type] = sum
+      calculateTotals('exp')
+      calculateTotals('inc')
 
       // 2. Calculate the budget: income - expenses
       data.budget = data.totals.inc - data.totals.exp
@@ -59,7 +83,19 @@ const budgetController = (() => {
         console.log(data.totals.exp, data.totals.inc)
         console.log(data.budget, data.percent)
       }
+
       return data
+    },
+    calculatePercentages: () => {
+      data.allItems.exp.forEach((cur) => {
+        cur.calcPercentage(data.totals.inc)
+      })
+    },
+    getPercentages: () => {
+      const allPerc = data.allItems.exp.map((cur) => {
+        return cur.getPercentage()
+      })
+      return allPerc
     },
     removeItem: (type, id) => {
       const ids = data.allItems[type].map((current) => {
