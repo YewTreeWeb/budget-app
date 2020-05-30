@@ -2246,6 +2246,30 @@ ol.no-style
         flex-wrap: nowrap;
 }
 
+@supports (gap: 1px)
+{
+    .budget__income .budget__amount,
+    .budget__expenses .budget__amount
+    {
+        gap: 5px;
+    }
+}
+
+.budget__income .budget__amount .amount,
+.budget__expenses .budget__amount .amount
+{
+    margin-left: 5px;
+}
+
+@supports (gap: 1px)
+{
+    .budget__income .budget__amount .amount,
+    .budget__expenses .budget__amount .amount
+    {
+        margin-left: unset;
+    }
+}
+
 .budget__income
 {
     margin-bottom: 15px;
@@ -2258,13 +2282,17 @@ ol.no-style
     background-color: var(--colour-error);
 }
 
-.budget__percentage
+.budget__expenses .percentage
 {
     font-size: 17px;
     font-weight: 200;
 
-    margin-left: 5px;
-    padding: 3px 6px;
+    width: 0;
+    margin-left: 0;
+    padding: 0;
+
+    -webkit-transition: all .3s ease-in;
+            transition: all .3s ease-in;
 
     opacity: 0;
     background-color: hsla(0deg, 64.016736%, 68.137255%, 50%);
@@ -2272,11 +2300,23 @@ ol.no-style
     -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
 }
 
-.budget__percentage.show
+.budget__expenses .percentage.show
 {
+    width: auto;
+    margin-left: 5px;
+    padding: 3px 6px;
+
     opacity: 1;
 
     -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
+}
+
+@supports (gap: 1px)
+{
+    .budget__expenses .percentage.show
+    {
+        margin-left: unset;
+    }
 }
 
 .add
@@ -2426,11 +2466,45 @@ ol.no-style
         flex-flow: row wrap;
 }
 
+@supports (gap: 1px)
+{
+    .income__list > li .items,
+    .expenses__list > li .items
+    {
+        gap: 5px;
+    }
+}
+
+.income__list > li .items__value,
+.income__list > li .items__percent,
+.expenses__list > li .items__value,
+.expenses__list > li .items__percent
+{
+    margin-left: 5px;
+}
+
+@supports (gap: 1px)
+{
+    .income__list > li .items__value,
+    .income__list > li .items__percent,
+    .expenses__list > li .items__value,
+    .expenses__list > li .items__percent
+    {
+        margin-left: unset;
+    }
+}
+
 .income__list > li .items__value,
 .expenses__list > li .items__value
 {
     font-weight: 600;
     line-height: normal;
+}
+
+.income__list > li .items__value p,
+.expenses__list > li .items__value p
+{
+    margin: 0;
 }
 
 .income__list > li .items__del,
@@ -2439,13 +2513,129 @@ ol.no-style
     line-height: normal;
 
     height: 20px;
+    margin-left: 0;
+
+    -webkit-transition: opacity 1.4s ease-in-out;
+            transition: opacity 1.4s ease-in-out;
+
+    opacity: 0;
+
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
 }
 
 .income__list > li .items__del > svg,
 .expenses__list > li .items__del > svg
 {
-    width: 20px;
+    width: 0;
     height: 20px;
+
+    -webkit-transition: width .2s ease-in-out;
+            transition: width .2s ease-in-out;
+}
+
+@supports (hover: hover)
+{
+    @media (hover: hover)
+    {
+        .income__list > li .items:hover .items__del,
+        .expenses__list > li .items:hover .items__del
+        {
+            width: auto;
+            margin-left: 5px;
+
+            opacity: 1;
+
+            -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
+        }
+
+        @supports (gap: 1px)
+        {
+            .income__list > li .items:hover .items__del,
+            .expenses__list > li .items:hover .items__del
+            {
+                margin-left: unset;
+            }
+        }
+
+        .income__list > li .items:hover .items__del > svg,
+        .expenses__list > li .items:hover .items__del > svg
+        {
+            width: 20px;
+        }
+    }
+
+    .income__list > li .items:active .items__del,
+    .income__list > li .items:focus .items__del,
+    .expenses__list > li .items:active .items__del,
+    .expenses__list > li .items:focus .items__del
+    {
+        width: auto;
+        margin-left: 5px;
+
+        opacity: 1;
+
+        -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
+    }
+
+    @supports (gap: 1px)
+    {
+        .income__list > li .items:active .items__del,
+        .income__list > li .items:focus .items__del,
+        .expenses__list > li .items:active .items__del,
+        .expenses__list > li .items:focus .items__del
+        {
+            margin-left: unset;
+        }
+    }
+
+    .income__list > li .items:active .items__del > svg,
+    .income__list > li .items:focus .items__del > svg,
+    .expenses__list > li .items:active .items__del > svg,
+    .expenses__list > li .items:focus .items__del > svg
+    {
+        width: 20px;
+    }
+}
+
+@supports not (hover: hover)
+{
+    .income__list > li .items:hover .items__del,
+    .income__list > li .items:active .items__del,
+    .income__list > li .items:focus .items__del,
+    .expenses__list > li .items:hover .items__del,
+    .expenses__list > li .items:active .items__del,
+    .expenses__list > li .items:focus .items__del
+    {
+        width: auto;
+        margin-left: 5px;
+
+        opacity: 1;
+
+        -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
+    }
+
+    @supports (gap: 1px)
+    {
+        .income__list > li .items:hover .items__del,
+        .income__list > li .items:active .items__del,
+        .income__list > li .items:focus .items__del,
+        .expenses__list > li .items:hover .items__del,
+        .expenses__list > li .items:active .items__del,
+        .expenses__list > li .items:focus .items__del
+        {
+            margin-left: unset;
+        }
+    }
+
+    .income__list > li .items:hover .items__del > svg,
+    .income__list > li .items:active .items__del > svg,
+    .income__list > li .items:focus .items__del > svg,
+    .expenses__list > li .items:hover .items__del > svg,
+    .expenses__list > li .items:active .items__del > svg,
+    .expenses__list > li .items:focus .items__del > svg
+    {
+        width: 20px;
+    }
 }
 
 .income .items__value,

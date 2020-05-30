@@ -47,7 +47,7 @@ class UIController {
     `
 
     if (type === 'exp') {
-      html += '<div class="item-percent"><p>0&#37;</p></div>'
+      html += '<div class="items__percent"><p>0&#37;</p></div>'
     }
 
     html += `
@@ -95,7 +95,7 @@ class UIController {
   }
 
   displayPercentage(percentage) {
-    const percent = document.querySelector('.budget__percentage')
+    const percent = document.querySelector('.percentage')
 
     if (percentage > 0) {
       percent.classList.add('show')
@@ -128,7 +128,7 @@ class UIController {
   }
 
   displayPercentages(percentages) {
-    const fields = document.querySelectorAll('.item-percent')
+    const fields = document.querySelectorAll('.items__percent')
     const nodeListForEach = (list, cb) => {
       for (let i = 0; i < list.length; i++) {
         cb(list[i], i)

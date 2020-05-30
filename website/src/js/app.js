@@ -31,16 +31,24 @@ const controller = ((budgetCtrl) => {
 
   // Toggle the submit new cost from either income or expense.
   type.addEventListener('change', (e) => {
-    console.log(e)
     const options = Array.from(type.options)
-    console.log(options)
-    if (type.value === 'exp') {
+    if (process.env.NODE_ENV !== 'production') {
+      console.log(e)
+      console.log(
+        type.attributes,
+        type.options,
+        type.options.selectedIndex,
+        options,
+        options[1]
+      )
+    }
+    if (type.options.selectedIndex === 1) {
       check.classList.add(type.value)
-      // type.options[0].removeAttribute('selected')
-      // type.options.selectedIndex.setAttribute('selected')
+      options[0].removeAttribute('selected', 'selected')
+      options[1].setAttribute('selected', 'selected')
     } else {
-      // options[1].removeAttribute('selected')
-      // options[0].setAttribute('selected')
+      options[1].removeAttribute('selected', 'selected')
+      options[0].setAttribute('selected', 'selected')
       check.classList.remove('exp')
     }
   })
