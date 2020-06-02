@@ -1,5 +1,4 @@
 /* eslint-disable class-methods-use-this */
-
 import budgetController from './budgetcontroller'
 
 /* eslint-disable prefer-destructuring */
@@ -154,6 +153,12 @@ class UIController {
 
     // 3. Update UI to show new percentages
     this.displayPercentages(percentages)
+  }
+
+  updateDate() {
+    const budgetDate = document.querySelector('.budget__month')
+    const date = dayjs('MMMM YYYY')
+    budgetDate.textContent = date
   }
 
   deleteItem() {

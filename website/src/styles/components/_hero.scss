@@ -1,20 +1,10 @@
 .hero {
   $self: &;
   @include bgImg(
-    'volcano.jpg',
-    center center,
+    'piggy-bank.jpg',
+    calc(100% - -160px) center,
     'responsive',
-    null,
-    '<=200',
-    '<=482',
-    '<=672',
-    '<=835',
-    '<=973',
-    '<=1098',
-    '<=1212',
-    '<=1322',
-    '<=1377',
-    '<=1400'
+    null
   );
   /// If reduced data os enabled on device, turn off images.
   @media (prefers-reduced-data) {

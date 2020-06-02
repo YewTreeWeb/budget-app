@@ -2658,10 +2658,10 @@ ol.no-style
     height: 760px;
 
     background-color: var(--colour-white);
-    background-image: url('/assets/images/volcano.jpg');
-    background-image: url('/assets/images/volcano.webp');
+    background-image: url('/assets/images/piggy-bank.jpg');
+    background-image: url('/assets/images/piggy-bank.webp');
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: calc(100% - -160px) center;
     background-size: cover;
 }
 
@@ -4605,56 +4605,11 @@ ol.no-style
     }
 }
 
-@media (max-width: 1400px)
-{
-    .hero
-    {
-        background-image: url('/assets/images/volcano_1400.jpg');
-        background-image: url('/assets/images/volcano_1400.webp');
-    }
-}
-
-@media (max-width: 1377px)
-{
-    .hero
-    {
-        background-image: url('/assets/images/volcano_1377.jpg');
-        background-image: url('/assets/images/volcano_1377.webp');
-    }
-}
-
-@media (max-width: 1322px)
-{
-    .hero
-    {
-        background-image: url('/assets/images/volcano_1322.jpg');
-        background-image: url('/assets/images/volcano_1322.webp');
-    }
-}
-
 @media screen and (max-width: 1215px)
 {
     .container.is-widescreen
     {
         max-width: 1152px;
-    }
-}
-
-@media (max-width: 1212px)
-{
-    .hero
-    {
-        background-image: url('/assets/images/volcano_1212.jpg');
-        background-image: url('/assets/images/volcano_1212.webp');
-    }
-}
-
-@media (max-width: 1098px)
-{
-    .hero
-    {
-        background-image: url('/assets/images/volcano_1098.jpg');
-        background-image: url('/assets/images/volcano_1098.webp');
     }
 }
 
@@ -5030,24 +4985,6 @@ ol.no-style
     }
 }
 
-@media (max-width: 973px)
-{
-    .hero
-    {
-        background-image: url('/assets/images/volcano_973.jpg');
-        background-image: url('/assets/images/volcano_973.webp');
-    }
-}
-
-@media (max-width: 835px)
-{
-    .hero
-    {
-        background-image: url('/assets/images/volcano_835.jpg');
-        background-image: url('/assets/images/volcano_835.webp');
-    }
-}
-
 @media screen and (max-width: 768px)
 {
     .column.is-narrow-mobile
@@ -5420,24 +5357,6 @@ ol.no-style
     }
 }
 
-@media (max-width: 672px)
-{
-    .hero
-    {
-        background-image: url('/assets/images/volcano_672.jpg');
-        background-image: url('/assets/images/volcano_672.webp');
-    }
-}
-
-@media (max-width: 482px)
-{
-    .hero
-    {
-        background-image: url('/assets/images/volcano_482.jpg');
-        background-image: url('/assets/images/volcano_482.webp');
-    }
-}
-
 @media (max-width: 414px)
 {
     .budget__income .budget__amount,
@@ -5448,15 +5367,6 @@ ol.no-style
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
-    }
-}
-
-@media (max-width: 200px)
-{
-    .hero
-    {
-        background-image: url('/assets/images/volcano_200.jpg');
-        background-image: url('/assets/images/volcano_200.webp');
     }
 }
 

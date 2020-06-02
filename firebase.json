@@ -4,11 +4,17 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "website/build",
+    "public": "./website/build",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ],
     "headers": [ {
       "source": "**/*",

@@ -25,7 +25,7 @@ clean:
 
 ## Deploying
 # If using Github Pages make sure you have a gh-pages branch.
-deploy: null
+deploy: "firebase"
 
 ## Image uploading
 cloudinary:
