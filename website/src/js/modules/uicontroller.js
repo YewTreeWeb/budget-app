@@ -1,6 +1,33 @@
 /* eslint-disable class-methods-use-this */
 import budgetController from './budgetcontroller'
 
+const formatNumber = (number, type) => {
+  /**
+   * + or - before the number
+   * exactly 2 decimal points
+   * comma seperating the thousands
+   *
+   * 2310.4567 = + 2,310.46
+   */
+  let num = Math.abs(number)
+  num = num.toFixed(2)
+
+  const numSplit = num.split('.') // now a string and will split the . to replace with a ,
+  let int = numSplit[0]
+  let decimal = numSplit[1]
+  decimal = Number(decimal) > 0 ? `.${decimal}` : ''
+
+  if (int.length > 3) {
+    // substr allows for only part of the string to be taken
+    int = `${int.substr(0, int.length - 3)},${int.substr(int.length - 3, 3)}` // input 2310, output 2,310
+  }
+
+  const sign = type === 'exp' ? '-' : '+'
+
+  // Return the formatted string
+  return `${sign} ${int}${decimal}`
+}
+
 /* eslint-disable prefer-destructuring */
 class UIController {
   constructor(cost, description, value) {
@@ -17,20 +44,6 @@ class UIController {
     }
   }
 
-  formatNumber(number, type) {
-    /**
-     * + or - before the number
-     * exactly 2 decimal points
-     * comma seperating the thousands
-     *
-     * 2310.4567 = + 2,310.46
-     */
-    let num = Math.abs(number)
-    num = num.toFixed(2)
-
-    const numSplit = num.split('.')
-  }
-
   // eslint-disable-next-line class-methods-use-this
   render(obj, type) {
     const item = type === 'exp' ? 'expenses' : 'income'
@@ -42,7 +55,10 @@ class UIController {
     <li class='${item}__item' id='${type}-${obj.id}'>
       <div class='item-desc'><p>${obj.desc}</p></div>
       <div class="items">
-        <div class='items__value'><p><span>&pound;</span>${obj.val}</p></div>
+        <div class='items__value'><p><span>&pound;</span>${formatNumber(
+          obj.val,
+          type
+        )}</p></div>
     `
 
     if (type === 'exp') {
@@ -83,9 +99,9 @@ class UIController {
       `.budget__expenses .budget__amount .amount`
     )
 
-    budget.textContent = obj.budget
-    inc.textContent = obj.totalInc
-    exp.textContent = obj.totalExp
+    budget.textContent = formatNumber(obj.budget, type)
+    inc.textContent = formatNumber(obj.totalInc, 'inc')
+    exp.textContent = formatNumber(obj.totalExp, 'exp')
 
     if (process.env.NODE_ENV !== 'production') {
       console.log(`The ${types} is/are ${obj.budget}`)
@@ -155,11 +171,11 @@ class UIController {
     this.displayPercentages(percentages)
   }
 
-  updateDate() {
-    const budgetDate = document.querySelector('.budget__month')
-    const date = dayjs('MMMM YYYY')
-    budgetDate.textContent = date
-  }
+  //   updateDate() {
+  //     const budgetDate = document.querySelector('.budget__month')
+  //     const date = dayjs('MMMM YYYY')
+  //     budgetDate.textContent = date
+  //   }
 
   deleteItem() {
     const item = document.querySelector('.income-expenses')
