@@ -25,33 +25,14 @@ const controller = ((budgetCtrl) => {
   const type = document.querySelector('.add__type')
   const desc = document.querySelector('.add__description')
   const value = document.querySelector('.add__value')
-  const check = document.querySelector('#check')
 
   const UICtrl = new UIController(type, desc, value)
 
+  // Shoe the latest date
+  UICtrl.displayDate()
+
   // Toggle the submit new cost from either income or expense.
-  type.addEventListener('change', (e) => {
-    const options = Array.from(type.options)
-    if (process.env.NODE_ENV !== 'production') {
-      console.log(e)
-      console.log(
-        type.attributes,
-        type.options,
-        type.options.selectedIndex,
-        options,
-        options[1]
-      )
-    }
-    if (type.options.selectedIndex === 1) {
-      check.classList.add(type.value)
-      options[0].removeAttribute('selected', 'selected')
-      options[1].setAttribute('selected', 'selected')
-    } else {
-      options[1].removeAttribute('selected', 'selected')
-      options[0].setAttribute('selected', 'selected')
-      check.classList.remove('exp')
-    }
-  })
+  UICtrl.changeType()
 
   form.addEventListener('submit', (e) => {
     e.preventDefault()

@@ -2191,7 +2191,8 @@ ol.no-style
 }
 
 .budget__income,
-.budget__expenses
+.budget__expenses,
+.budget__savings
 {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -2214,7 +2215,8 @@ ol.no-style
 }
 
 .budget__income h4,
-.budget__expenses h4
+.budget__expenses h4,
+.budget__savings h4
 {
     margin: 0;
 
@@ -2222,7 +2224,8 @@ ol.no-style
 }
 
 .budget__income .budget__amount,
-.budget__expenses .budget__amount
+.budget__expenses .budget__amount,
+.budget__savings .budget__amount
 {
     font-size: 20px;
 
@@ -2249,14 +2252,16 @@ ol.no-style
 @supports (gap: 1px)
 {
     .budget__income .budget__amount,
-    .budget__expenses .budget__amount
+    .budget__expenses .budget__amount,
+    .budget__savings .budget__amount
     {
         gap: 5px;
     }
 }
 
 .budget__income .budget__amount .amount,
-.budget__expenses .budget__amount .amount
+.budget__expenses .budget__amount .amount,
+.budget__savings .budget__amount .amount
 {
     margin-left: 5px;
 }
@@ -2264,7 +2269,8 @@ ol.no-style
 @supports (gap: 1px)
 {
     .budget__income .budget__amount .amount,
-    .budget__expenses .budget__amount .amount
+    .budget__expenses .budget__amount .amount,
+    .budget__savings .budget__amount .amount
     {
         margin-left: unset;
     }
@@ -2277,12 +2283,8 @@ ol.no-style
     background-color: var(--colour-success);
 }
 
-.budget__expenses
-{
-    background-color: var(--colour-error);
-}
-
-.budget__expenses .percentage
+.budget__expenses .percentage,
+.budget__savings .percentage
 {
     font-size: 17px;
     font-weight: 200;
@@ -2300,7 +2302,8 @@ ol.no-style
     -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
 }
 
-.budget__expenses .percentage.show
+.budget__expenses .percentage.show,
+.budget__savings .percentage.show
 {
     width: auto;
     margin-left: 5px;
@@ -2313,10 +2316,23 @@ ol.no-style
 
 @supports (gap: 1px)
 {
-    .budget__expenses .percentage.show
+    .budget__expenses .percentage.show,
+    .budget__savings .percentage.show
     {
         margin-left: unset;
     }
+}
+
+.budget__expenses
+{
+    margin-bottom: 15px;
+
+    background-color: var(--colour-error);
+}
+
+.budget__savings
+{
+    background-color: var(--colour-secondary);
 }
 
 .add
@@ -2638,10 +2654,20 @@ ol.no-style
     }
 }
 
+.income__title
+{
+    color: var(--colour-success);
+}
+
 .income .items__value,
 .income .items__del > svg
 {
     color: var(--colour-success);
+}
+
+.expenses__title
+{
+    color: var(--colour-error);
 }
 
 .expenses .items__value,
@@ -5360,7 +5386,8 @@ ol.no-style
 @media (max-width: 414px)
 {
     .budget__income .budget__amount,
-    .budget__expenses .budget__amount
+    .budget__expenses .budget__amount,
+    .budget__savings .budget__amount
     {
             flex-direction: column;
 

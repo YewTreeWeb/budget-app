@@ -18,7 +18,8 @@
     }
   }
   &__income,
-  &__expenses {
+  &__expenses,
+  &__savings {
     @include flex(center, space-between, row);
     padding: 12px;
     color: v(colour-white);
@@ -45,8 +46,8 @@
     background-color: v(colour-success);
     margin-bottom: 15px;
   }
-  &__expenses {
-    background-color: v(colour-error);
+  &__expenses,
+  &__savings {
     .percentage {
       font-weight: $weight-exlight;
       font-size: $font-md;
@@ -66,6 +67,13 @@
         }
       }
     }
+  }
+  &__expenses {
+    background-color: v(colour-error);
+    margin-bottom: 15px;
+  }
+  &__savings {
+    background-color: v(colour-secondary);
   }
 }
 
@@ -182,6 +190,9 @@
 }
 
 .income {
+  &__title {
+    color: v(colour-success);
+  }
   .items {
     &__value,
     &__del > svg {
@@ -191,6 +202,9 @@
 }
 
 .expenses {
+  &__title {
+    color: v(colour-error);
+  }
   .items {
     &__value,
     &__del > svg {

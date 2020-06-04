@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import budgetController from './budgetcontroller'
 
-const formatNumber = (number, type) => {
+const formatNumber = (number, type, money = false, calc = true) => {
   /**
    * + or - before the number
    * exactly 2 decimal points
@@ -22,10 +22,19 @@ const formatNumber = (number, type) => {
     int = `${int.substr(0, int.length - 3)},${int.substr(int.length - 3, 3)}` // input 2310, output 2,310
   }
 
-  const sign = type === 'exp' ? '-' : '+'
+  let sign
+  if (calc) {
+    sign =
+      type === 'exp'
+        ? '<span class="sign">&#45;</span> '
+        : '<span class="sign">&#43;</span> '
+  } else {
+    sign = ''
+  }
+  const currency = money ? '<span class="currency">&pound;</span>' : ''
 
   // Return the formatted string
-  return `${sign} ${int}${decimal}`
+  return `${sign}${currency}${int}${decimal}`
 }
 
 /* eslint-disable prefer-destructuring */
@@ -55,9 +64,11 @@ class UIController {
     <li class='${item}__item' id='${type}-${obj.id}'>
       <div class='item-desc'><p>${obj.desc}</p></div>
       <div class="items">
-        <div class='items__value'><p><span>&pound;</span>${formatNumber(
+        <div class='items__value'><p>${formatNumber(
           obj.val,
-          type
+          type,
+          true,
+          false
         )}</p></div>
     `
 
@@ -91,17 +102,13 @@ class UIController {
   displayBudget(obj) {
     const type = obj.budget > 0 ? 'inc' : 'exp'
     const types = type === 'exp' ? 'expenses' : 'income'
-    const budget = document.querySelector('.budget__value .budget')
-    const inc = document.querySelector(
-      `.budget__income .budget__amount .amount`
-    )
-    const exp = document.querySelector(
-      `.budget__expenses .budget__amount .amount`
-    )
+    const budget = document.querySelector('.budget__value')
+    const inc = document.querySelector(`.budget__income .budget__amount`)
+    const exp = document.querySelector(`.budget__expenses .budget__amount`)
 
-    budget.textContent = formatNumber(obj.budget, type)
-    inc.textContent = formatNumber(obj.totalInc, 'inc')
-    exp.textContent = formatNumber(obj.totalExp, 'exp')
+    budget.innerHTML = formatNumber(obj.budget, type, true)
+    inc.innerHTML = formatNumber(obj.totalInc, 'inc')
+    exp.innerHTML = formatNumber(obj.totalExp, 'exp')
 
     if (process.env.NODE_ENV !== 'production') {
       console.log(`The ${types} is/are ${obj.budget}`)
@@ -171,11 +178,61 @@ class UIController {
     this.displayPercentages(percentages)
   }
 
-  //   updateDate() {
-  //     const budgetDate = document.querySelector('.budget__month')
-  //     const date = dayjs('MMMM YYYY')
-  //     budgetDate.textContent = date
-  //   }
+  displayDate() {
+    const budgetDate = document.querySelector('.budget__date')
+    const date = new Date()
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'Sepetember',
+      'October',
+      'November',
+      'December',
+    ]
+    budgetDate.textContent = `${months[date.getMonth()]} ${date.getFullYear()}`
+  }
+
+  changeType() {
+    const type = this.inputType
+    const check = document.querySelector('#check')
+    const fields = [type, this.inputDesc, this.inputVal, check]
+
+    if (process.env.NODE_ENV !== 'production') {
+      console.log(fields)
+    }
+
+    type.addEventListener('change', (e) => {
+      const options = Array.from(type.options)
+
+      if (process.env.NODE_ENV !== 'production') {
+        console.log(e)
+        console.log(
+          type.attributes,
+          type.options,
+          type.options.selectedIndex,
+          options,
+          options[1]
+        )
+      }
+
+      fields.forEach((field) => {
+        field.classList.toggle('exp')
+      })
+      if (type.options.selectedIndex === 1) {
+        options[0].removeAttribute('selected', 'selected')
+        options[1].setAttribute('selected', 'selected')
+      } else {
+        options[1].removeAttribute('selected', 'selected')
+        options[0].setAttribute('selected', 'selected')
+      }
+    })
+  }
 
   deleteItem() {
     const item = document.querySelector('.income-expenses')
