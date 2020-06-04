@@ -30,10 +30,16 @@ const budgetController = (() => {
     allItems: {
       exp: [],
       inc: [],
+      sav: [],
     },
     totals: {
       exp: 0,
       inc: 0,
+      sav: 0,
+    },
+    percent: {
+      exp: -1,
+      sav: -1,
     },
     budget: 0,
   }
@@ -67,21 +73,24 @@ const budgetController = (() => {
       // 1. Calculate the budget
       calculateTotals('exp')
       calculateTotals('inc')
+      calculateTotals('sav')
 
       // 2. Calculate the budget: income - expenses
-      data.budget = data.totals.inc - data.totals.exp
+      data.budget = data.totals.inc - (data.totals.exp + data.totals.sav)
 
       // 3. Calculate the percentage of income that we spent
       if (data.totals.inc > 0) {
-        data.percent = Math.round((data.totals.exp / data.totals.inc) * 100)
+        data.percent.exp = Math.round((data.totals.exp / data.totals.inc) * 100)
+        data.percent.sav = Math.round((data.totals.sav / data.totals.inc) * 100)
       } else {
-        data.percent = -1
+        data.percent.exp = -1
+        data.percent.sav = -1
       }
 
       // 3. Return the budget
       if (process.env.NODE_ENV !== 'production') {
         console.log(data.totals.exp, data.totals.inc)
-        console.log(data.budget, data.percent)
+        console.log(data.budget, data.percent.exp, data.percent.sav)
       }
 
       return data

@@ -55,7 +55,8 @@ class UIController {
 
   // eslint-disable-next-line class-methods-use-this
   render(obj, type) {
-    const item = type === 'exp' ? 'expenses' : 'income'
+    const item =
+      type === 'exp' ? 'expenses' : type === 'sav' ? 'savings' : 'income'
     const list = document.querySelector(`.${item}__list`)
     let html
 
@@ -95,7 +96,8 @@ class UIController {
       budget: data.budget,
       totalInc: data.totals.inc,
       totalExp: data.totals.exp,
-      percent: data.percent,
+      percentExp: data.percent.exp,
+      percentSav: data.percent.sav,
     }
   }
 
@@ -105,10 +107,12 @@ class UIController {
     const budget = document.querySelector('.budget__value')
     const inc = document.querySelector(`.budget__income .budget__amount`)
     const exp = document.querySelector(`.budget__expenses .budget__amount`)
+    const sav = document.querySelector(`.budget__savings .budget__amount`)
 
     budget.innerHTML = formatNumber(obj.budget, type, true)
     inc.innerHTML = formatNumber(obj.totalInc, 'inc')
     exp.innerHTML = formatNumber(obj.totalExp, 'exp')
+    sav.innerHTML = formatNumber(obj.totalSav, 'sav')
 
     if (process.env.NODE_ENV !== 'production') {
       console.log(`The ${types} is/are ${obj.budget}`)
@@ -116,8 +120,9 @@ class UIController {
     }
   }
 
-  displayPercentage(percentage) {
-    const percent = document.querySelector('.percentage')
+  displayPercentage(percentage, type) {
+    const types = type === 'exp' ? 'expenses' : 'savings'
+    const percent = document.querySelector(`.budget__${types} .percentage`)
 
     if (percentage > 0) {
       percent.classList.add('show')
@@ -146,7 +151,8 @@ class UIController {
     this.displayBudget(newBudget)
 
     // 4. Display the new overall budget percentage
-    this.displayPercentage(newBudget.percent)
+    this.displayPercentage(newBudget.percentExp, 'exp')
+    this.displayPercentage(newBudget.percentSav, 'sav')
   }
 
   displayPercentages(percentages) {
@@ -224,13 +230,16 @@ class UIController {
       fields.forEach((field) => {
         field.classList.toggle('exp')
       })
-      if (type.options.selectedIndex === 1) {
-        options[0].removeAttribute('selected', 'selected')
-        options[1].setAttribute('selected', 'selected')
-      } else {
-        options[1].removeAttribute('selected', 'selected')
-        options[0].setAttribute('selected', 'selected')
-      }
+      options.forEach((option, index) => {
+        if (option.selected) {
+          option.setAttribute('selected', 'selected')
+        } else {
+          option.removeAttribute('selected', 'selected')
+        }
+        if (process.env.NODE_ENV !== 'production') {
+          console.log(option, option.value, index)
+        }
+      })
     })
   }
 
