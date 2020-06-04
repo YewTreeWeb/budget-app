@@ -51,7 +51,6 @@
     .percentage {
       font-weight: $weight-exlight;
       font-size: $font-md;
-      background-color: hex2hsla(lighten(_colour(error), 15%), 50%);
       opacity: 0;
       width: 0;
       margin-left: 0;
@@ -71,9 +70,15 @@
   &__expenses {
     background-color: v(colour-error);
     margin-bottom: 15px;
+    .percentage {
+      background-color: hex2hsla(lighten(_colour(error), 15%), 50%);
+    }
   }
   &__savings {
     background-color: v(colour-secondary);
+    .percentage {
+      background-color: hex2hsla(lighten(_colour(secondary), 15%), 50%);
+    }
   }
 }
 
@@ -119,7 +124,8 @@
 }
 
 .income,
-.expenses {
+.expenses,
+.savings {
   $self: &;
   &__title {
     text-align: center;
@@ -197,6 +203,18 @@
     &__value,
     &__del > svg {
       color: v(colour-success);
+    }
+  }
+}
+
+.savings {
+  &__title {
+    color: v(colour-secondary);
+  }
+  .items {
+    &__value,
+    &__del > svg {
+      color: v(colour-secondary);
     }
   }
 }

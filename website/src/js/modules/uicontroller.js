@@ -73,7 +73,7 @@ class UIController {
         )}</p></div>
     `
 
-    if (type === 'exp') {
+    if (type === 'exp' || type === 'sav') {
       html += '<div class="items__percent"><p>0&#37;</p></div>'
     }
 
@@ -96,6 +96,7 @@ class UIController {
       budget: data.budget,
       totalInc: data.totals.inc,
       totalExp: data.totals.exp,
+      totalSav: data.totals.sav,
       percentExp: data.percent.exp,
       percentSav: data.percent.sav,
     }
@@ -112,7 +113,7 @@ class UIController {
     budget.innerHTML = formatNumber(obj.budget, type, true)
     inc.innerHTML = formatNumber(obj.totalInc, 'inc')
     exp.innerHTML = formatNumber(obj.totalExp, 'exp')
-    sav.innerHTML = formatNumber(obj.totalSav, 'sav')
+    sav.innerHTML = formatNumber(obj.totalSav, 'exp')
 
     if (process.env.NODE_ENV !== 'production') {
       console.log(`The ${types} is/are ${obj.budget}`)
@@ -155,8 +156,9 @@ class UIController {
     this.displayPercentage(newBudget.percentSav, 'sav')
   }
 
-  displayPercentages(percentages) {
-    const fields = document.querySelectorAll('.items__percent')
+  displayPercentages(percentages, type) {
+    const types = type === 'exp' ? 'expenses' : 'savings'
+    const fields = document.querySelectorAll(`.${types} .items__percent`)
     const nodeListForEach = (list, cb) => {
       for (let i = 0; i < list.length; i++) {
         cb(list[i], i)
@@ -175,13 +177,13 @@ class UIController {
 
   updatePercentages() {
     // 1. Calulate percentages
-    budgetController.calculatePercentages()
+    budgetController.calculatePercentages(this.inputType.value)
 
     // 2. Read percentages from budget controller
-    const percentages = budgetController.getPercentages()
+    const percentages = budgetController.getPercentages(this.inputType.value)
 
     // 3. Update UI to show new percentages
-    this.displayPercentages(percentages)
+    this.displayPercentages(percentages, this.inputType.value)
   }
 
   displayDate() {

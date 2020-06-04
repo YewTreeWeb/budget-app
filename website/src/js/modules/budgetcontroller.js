@@ -95,13 +95,13 @@ const budgetController = (() => {
 
       return data
     },
-    calculatePercentages: () => {
-      data.allItems.exp.forEach((cur) => {
+    calculatePercentages: (type) => {
+      data.allItems[type].forEach((cur) => {
         cur.calcPercentage(data.totals.inc)
       })
     },
-    getPercentages: () => {
-      const allPerc = data.allItems.exp.map((cur) => {
+    getPercentages: (type) => {
+      const allPerc = data.allItems[type].map((cur) => {
         return cur.getPercentage()
       })
       return allPerc

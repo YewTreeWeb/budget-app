@@ -2297,7 +2297,6 @@ ol.no-style
             transition: all .3s ease-in;
 
     opacity: 0;
-    background-color: hsla(0deg, 64.016736%, 68.137255%, 50%);
 
     -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
 }
@@ -2330,9 +2329,19 @@ ol.no-style
     background-color: var(--colour-error);
 }
 
+.budget__expenses .percentage
+{
+    background-color: hsla(0deg, 64.016736%, 68.137255%, 50%);
+}
+
 .budget__savings
 {
     background-color: var(--colour-secondary);
+}
+
+.budget__savings .percentage
+{
+    background-color: hsla(8.275862deg, 18.471338%, 84.215686%, 50%);
 }
 
 .add
@@ -2410,7 +2419,8 @@ ol.no-style
 }
 
 .income__title,
-.expenses__title
+.expenses__title,
+.savings__title
 {
     margin-top: unset;
 
@@ -2418,7 +2428,8 @@ ol.no-style
 }
 
 .income__list,
-.expenses__list
+.expenses__list,
+.savings__list
 {
     padding-left: 0;
 
@@ -2426,7 +2437,8 @@ ol.no-style
 }
 
 .income__list > li,
-.expenses__list > li
+.expenses__list > li,
+.savings__list > li
 {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -2452,19 +2464,22 @@ ol.no-style
 }
 
 .income__list > li:first-child,
-.expenses__list > li:first-child
+.expenses__list > li:first-child,
+.savings__list > li:first-child
 {
     border-top: 1px solid var(--colour-grey-light);
 }
 
 .income__list > li .item-desc,
-.expenses__list > li .item-desc
+.expenses__list > li .item-desc,
+.savings__list > li .item-desc
 {
     line-height: normal;
 }
 
 .income__list > li .items,
-.expenses__list > li .items
+.expenses__list > li .items,
+.savings__list > li .items
 {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -2485,7 +2500,8 @@ ol.no-style
 @supports (gap: 1px)
 {
     .income__list > li .items,
-    .expenses__list > li .items
+    .expenses__list > li .items,
+    .savings__list > li .items
     {
         gap: 5px;
     }
@@ -2494,7 +2510,9 @@ ol.no-style
 .income__list > li .items__value,
 .income__list > li .items__percent,
 .expenses__list > li .items__value,
-.expenses__list > li .items__percent
+.expenses__list > li .items__percent,
+.savings__list > li .items__value,
+.savings__list > li .items__percent
 {
     margin-left: 5px;
 }
@@ -2504,27 +2522,32 @@ ol.no-style
     .income__list > li .items__value,
     .income__list > li .items__percent,
     .expenses__list > li .items__value,
-    .expenses__list > li .items__percent
+    .expenses__list > li .items__percent,
+    .savings__list > li .items__value,
+    .savings__list > li .items__percent
     {
         margin-left: unset;
     }
 }
 
 .income__list > li .items__value,
-.expenses__list > li .items__value
+.expenses__list > li .items__value,
+.savings__list > li .items__value
 {
     font-weight: 600;
     line-height: normal;
 }
 
 .income__list > li .items__value p,
-.expenses__list > li .items__value p
+.expenses__list > li .items__value p,
+.savings__list > li .items__value p
 {
     margin: 0;
 }
 
 .income__list > li .items__del,
-.expenses__list > li .items__del
+.expenses__list > li .items__del,
+.savings__list > li .items__del
 {
     line-height: normal;
 
@@ -2540,7 +2563,8 @@ ol.no-style
 }
 
 .income__list > li .items__del > svg,
-.expenses__list > li .items__del > svg
+.expenses__list > li .items__del > svg,
+.savings__list > li .items__del > svg
 {
     width: 0;
     height: 20px;
@@ -2554,7 +2578,8 @@ ol.no-style
     @media (hover: hover)
     {
         .income__list > li .items:hover .items__del,
-        .expenses__list > li .items:hover .items__del
+        .expenses__list > li .items:hover .items__del,
+        .savings__list > li .items:hover .items__del
         {
             width: auto;
             margin-left: 5px;
@@ -2567,14 +2592,16 @@ ol.no-style
         @supports (gap: 1px)
         {
             .income__list > li .items:hover .items__del,
-            .expenses__list > li .items:hover .items__del
+            .expenses__list > li .items:hover .items__del,
+            .savings__list > li .items:hover .items__del
             {
                 margin-left: unset;
             }
         }
 
         .income__list > li .items:hover .items__del > svg,
-        .expenses__list > li .items:hover .items__del > svg
+        .expenses__list > li .items:hover .items__del > svg,
+        .savings__list > li .items:hover .items__del > svg
         {
             width: 20px;
         }
@@ -2583,7 +2610,9 @@ ol.no-style
     .income__list > li .items:active .items__del,
     .income__list > li .items:focus .items__del,
     .expenses__list > li .items:active .items__del,
-    .expenses__list > li .items:focus .items__del
+    .expenses__list > li .items:focus .items__del,
+    .savings__list > li .items:active .items__del,
+    .savings__list > li .items:focus .items__del
     {
         width: auto;
         margin-left: 5px;
@@ -2598,7 +2627,9 @@ ol.no-style
         .income__list > li .items:active .items__del,
         .income__list > li .items:focus .items__del,
         .expenses__list > li .items:active .items__del,
-        .expenses__list > li .items:focus .items__del
+        .expenses__list > li .items:focus .items__del,
+        .savings__list > li .items:active .items__del,
+        .savings__list > li .items:focus .items__del
         {
             margin-left: unset;
         }
@@ -2607,7 +2638,9 @@ ol.no-style
     .income__list > li .items:active .items__del > svg,
     .income__list > li .items:focus .items__del > svg,
     .expenses__list > li .items:active .items__del > svg,
-    .expenses__list > li .items:focus .items__del > svg
+    .expenses__list > li .items:focus .items__del > svg,
+    .savings__list > li .items:active .items__del > svg,
+    .savings__list > li .items:focus .items__del > svg
     {
         width: 20px;
     }
@@ -2620,7 +2653,10 @@ ol.no-style
     .income__list > li .items:focus .items__del,
     .expenses__list > li .items:hover .items__del,
     .expenses__list > li .items:active .items__del,
-    .expenses__list > li .items:focus .items__del
+    .expenses__list > li .items:focus .items__del,
+    .savings__list > li .items:hover .items__del,
+    .savings__list > li .items:active .items__del,
+    .savings__list > li .items:focus .items__del
     {
         width: auto;
         margin-left: 5px;
@@ -2637,7 +2673,10 @@ ol.no-style
         .income__list > li .items:focus .items__del,
         .expenses__list > li .items:hover .items__del,
         .expenses__list > li .items:active .items__del,
-        .expenses__list > li .items:focus .items__del
+        .expenses__list > li .items:focus .items__del,
+        .savings__list > li .items:hover .items__del,
+        .savings__list > li .items:active .items__del,
+        .savings__list > li .items:focus .items__del
         {
             margin-left: unset;
         }
@@ -2648,7 +2687,10 @@ ol.no-style
     .income__list > li .items:focus .items__del > svg,
     .expenses__list > li .items:hover .items__del > svg,
     .expenses__list > li .items:active .items__del > svg,
-    .expenses__list > li .items:focus .items__del > svg
+    .expenses__list > li .items:focus .items__del > svg,
+    .savings__list > li .items:hover .items__del > svg,
+    .savings__list > li .items:active .items__del > svg,
+    .savings__list > li .items:focus .items__del > svg
     {
         width: 20px;
     }
@@ -2663,6 +2705,17 @@ ol.no-style
 .income .items__del > svg
 {
     color: var(--colour-success);
+}
+
+.savings__title
+{
+    color: var(--colour-secondary);
+}
+
+.savings .items__value,
+.savings .items__del > svg
+{
+    color: var(--colour-secondary);
 }
 
 .expenses__title
