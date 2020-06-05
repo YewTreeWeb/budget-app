@@ -284,7 +284,7 @@ class UIController {
     const button = document.querySelector('#save')
     const data = budgetController.getData()
     button.addEventListener('click', () => {
-      console.log(data)
+      console.log(data, data.allItems.inc)
       pastbudget
         .saveBudget(data)
         .then(() => {

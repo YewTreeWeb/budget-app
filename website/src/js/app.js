@@ -8,6 +8,7 @@ import 'airbnb-browser-shims'
 import './modules/helpers'
 import budgetController from './modules/budgetcontroller'
 import UIController from './modules/uicontroller'
+import PastBudget from './modules/pastbudget'
 
 // Remove loading class from body on window load.
 const body = document.querySelector('body')
@@ -27,6 +28,7 @@ const controller = ((budgetCtrl) => {
   const value = document.querySelector('.add__value')
 
   const UICtrl = new UIController(type, desc, value)
+  const pastbudget = new PastBudget()
 
   // Shoe the latest date
   UICtrl.displayDate()
@@ -36,6 +38,9 @@ const controller = ((budgetCtrl) => {
 
   // Save budgets to Firebase
   UICtrl.saving()
+
+  const test = budgetCtrl.getData()
+  const { inc } = test.allItems
 
   form.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -69,7 +74,14 @@ const controller = ((budgetCtrl) => {
         console.log(newItem)
       }
     }
+    console.log(inc)
   })
   // Delete an added income or expense
   UICtrl.deleteItem()
+
+  pastbudget.getBudget((data, id) => {
+    if (process.env.NODE_ENV !== 'production') {
+      console.log(data, id)
+    }
+  })
 })(budgetController)

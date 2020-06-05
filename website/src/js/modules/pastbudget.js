@@ -9,6 +9,7 @@ class PastBudget {
 
   async saveBudget(obj) {
     const now = new Date()
+    const { exp, inc, sav } = obj.allItems
     const budget = {
       budget: obj.budget,
       totalInc: obj.totals.inc,
@@ -17,9 +18,9 @@ class PastBudget {
       percentExp: obj.percent.exp,
       percentSav: obj.percent.sav,
       allItems: {
-        exp: [obj.allItems.exp],
-        inc: [obj.allItems.inc],
-        sav: [obj.allItems.sav],
+        exp,
+        inc,
+        sav,
       },
       created_at: firebase.firestore.Timestamp.fromDate(now),
     }
