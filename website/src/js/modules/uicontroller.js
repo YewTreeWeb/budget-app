@@ -1,8 +1,5 @@
 /* eslint-disable class-methods-use-this */
 import budgetController from './budgetcontroller'
-import PastBudget from './pastbudget'
-
-const pastbudget = new PastBudget()
 
 const formatNumber = (number, type, money = false, calc = true) => {
   /**
@@ -277,22 +274,6 @@ class UIController {
         // 4. Update and show the new percentages
         this.updatePercentages()
       }
-    })
-  }
-
-  saving() {
-    const button = document.querySelector('#save')
-    const getData = budgetController.calculateBudget()
-    const currentBudget = this.getBudget(getData)
-    button.addEventListener('click', () => {
-      pastbudget
-        .saveBudget(currentBudget)
-        .then(() => {
-          console.log('saved')
-        })
-        .catch((err) => {
-          console.error(err)
-        })
     })
   }
 }
