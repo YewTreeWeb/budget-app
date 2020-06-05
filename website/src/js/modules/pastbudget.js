@@ -1,3 +1,7 @@
+// todo: save budget data to firebase
+// todo: get allItems data to save so they can be repopulated when loaded.
+// todo: get the data from firebase when a date has been chosen from the select options and update the UI
+
 class PastBudget {
   constructor() {
     this.budgets = db.collection('budgets')
@@ -12,11 +16,11 @@ class PastBudget {
       totalSav: obj.totals.sav,
       percentExp: obj.percent.exp,
       percentSav: obj.percent.sav,
-      // allItems: {
-      //   exp: obj.allItems.exp,
-      //   inc: obj.allItems.inc,
-      //   sav: obj.allItems.sav,
-      // },
+      allItems: {
+        exp: [obj.allItems.exp],
+        inc: [obj.allItems.inc],
+        sav: [obj.allItems.sav],
+      },
       created_at: firebase.firestore.Timestamp.fromDate(now),
     }
     const response = await this.budgets.add(budget)
