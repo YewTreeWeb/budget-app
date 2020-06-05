@@ -1,0 +1,54 @@
+.site-header {
+  .load-budgets {
+    position: relative;
+    width: 300px;
+    .chosen-date {
+      @include margin(0);
+      box-sizing: border-box;
+      @include size(100%, 4rem);
+      text-transform: uppercase;
+      font-weight: $weight;
+      letter-spacing: 2px;
+      @include padding(1rem);
+      background-color: v(colour-grey-light);
+      border: 3px solid transparent;
+      transition: 0.3s ease-in-out;
+    }
+    .date-list {
+      text-transform: uppercase;
+      font-weight: $weight;
+      @include margin(4rem 0 0);
+      @include padding(0);
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include size(100%, null);
+      list-style: none;
+      box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      max-height: 0;
+      transition: 0.3s ease-in-out;
+      &.open {
+        max-height: 320px;
+        overflow: auto;
+      }
+      &.closed {
+        max-height: 0;
+        overflow: hidden;
+      }
+      > li {
+        position: relative;
+        @include size(null, 4rem);
+        background-color: v(colour-grey-light);
+        @include padding(1rem);
+        @include flex(center, flex-start);
+        cursor: pointer;
+        transition: background-color 0.3s;
+        &:hover {
+          background-color: v(colour-accent);
+        }
+      }
+    }
+  }
+}

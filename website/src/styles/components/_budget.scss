@@ -31,14 +31,8 @@
       @include flex(center, center, row, false);
       margin: 0;
       font-size: _heading((h5, 1));
-      @supports (gap: 1px) {
-        gap: 5px;
-      }
-      .amount {
-        margin-left: 5px;
-        @supports (gap: 1px) {
-          margin-left: unset;
-        }
+      .sign {
+        margin-right: 4px;
       }
     }
   }
@@ -48,12 +42,15 @@
   }
   &__expenses,
   &__savings {
-    .percentage {
+    #{ $self }__data {
+      @include flex(center, center, row, false);
+    }
+    #{ $self }__percentage {
       font-weight: $weight-exlight;
       font-size: $font-md;
       opacity: 0;
       width: 0;
-      margin-left: 0;
+      @include margin(0);
       padding: 0;
       transition: all 0.3s ease-in;
       &.show {
@@ -61,22 +58,19 @@
         width: auto;
         @include padding(3px 6px);
         margin-left: 5px;
-        @supports (gap: 1px) {
-          margin-left: unset;
-        }
       }
     }
   }
   &__expenses {
     background-color: v(colour-error);
     margin-bottom: 15px;
-    .percentage {
+    #{ $self }__percentage {
       background-color: hex2hsla(lighten(_colour(error), 15%), 50%);
     }
   }
   &__savings {
     background-color: v(colour-secondary);
-    .percentage {
+    #{ $self }__percentage {
       background-color: hex2hsla(lighten(_colour(secondary), 15%), 50%);
     }
   }
@@ -118,6 +112,9 @@
         &.exp {
           color: v(colour-error);
         }
+        &.sav {
+          color: v(colour-secondary);
+        }
       }
     }
   }
@@ -148,15 +145,9 @@
       }
       .items {
         @include flex(center, flex-end, row);
-        @supports (gap: 1px) {
-          gap: 5px;
-        }
         &__value,
         &__percent {
           margin-left: 5px;
-          @supports (gap: 1px) {
-            margin-left: unset;
-          }
         }
         &__value {
           font-weight: $weight-heavy;

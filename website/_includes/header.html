@@ -1,15 +1,22 @@
 <header class="site-header reveal-from-top navbar">
   <div class="container">
     <div class="navbar-brand">
-      <a class="navbar-item site-logo" href="{{ site.baseurl | default: site.url }}">
+      <a
+        class="navbar-item site-logo"
+        href="{{ site.baseurl | default: site.url }}"
+      >
         {%- if site.logo -%}
-          <img src="" alt="{{ site.title }}">
-        {%- else -%}
-          {{ site.title }}
-        {%- endif -%}
+        <img src="" alt="{{ site.title }}" />
+        {%- else -%} {{ site.title }} {%- endif -%}
       </a>
 
-      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="site-nav">
+      <a
+        role="button"
+        class="navbar-burger burger"
+        aria-label="menu"
+        aria-expanded="false"
+        data-target="site-nav"
+      >
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -19,9 +26,27 @@
     <div class="navbar-end">
       {%- include_cached navigation.html -%}
       <div class="navbar-item">
-        <button id="save" class="btn" aria-label="Save the current budget for later viewing" title="Save current budget"
-          type="button">{%- include svg-icon.html icon="Sun" id="sun" w="59" h="59" hidden=true -%}</button>
-        <select name="loadBudget" id="load" class="btn"><option value="null" selected="selected">Choose date</option></select>
+        <button
+          id="save"
+          class="btn"
+          aria-label="Save the current budget for later viewing"
+          title="Save current budget"
+          type="button"
+        >
+          {%- include svg-icon.html icon="Sun" id="sun" w="59" h="59"
+          hidden=true -%}
+        </button>
+        <form class="load-budgets">
+          <input
+            class="chosen-date"
+            type="text"
+            value=""
+            placeholder="Choose a date"
+          />
+          <ul class="date-list">
+            <li>No saved dates</li>
+          </ul>
+        </form>
       </div>
     </div>
   </div>

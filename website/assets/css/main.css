@@ -2162,6 +2162,109 @@ ol.no-style
     font-style: italic;
 }
 
+.site-header .load-budgets
+{
+    position: relative;
+
+    width: 300px;
+}
+
+.site-header .load-budgets .chosen-date
+{
+    font-weight: 400;
+
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    width: 100%;
+    height: 64px;
+    height: 4rem;
+    margin: 0;
+    padding: 16px;
+    padding: 1rem;
+
+    -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    border: 3px solid transparent;
+    background-color: var(--colour-grey-light);
+}
+
+.site-header .load-budgets .date-list
+{
+    font-weight: 400;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    overflow: hidden;
+
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    width: 100%;
+    max-height: 0;
+    margin: 64px 0 0;
+    margin: 4rem 0 0;
+    padding: 0;
+
+    list-style: none;
+
+    -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+    text-transform: uppercase;
+
+    -webkit-box-shadow: 0 5px 8px 0 rgba(0, 0, 0, .2);
+            box-shadow: 0 5px 8px 0 rgba(0, 0, 0, .2);
+}
+
+.site-header .load-budgets .date-list.open
+{
+    overflow: auto;
+
+    max-height: 320px;
+}
+
+.site-header .load-budgets .date-list.closed
+{
+    overflow: hidden;
+
+    max-height: 0;
+}
+
+.site-header .load-budgets .date-list > li
+{
+    position: relative;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    height: 64px;
+    height: 4rem;
+    padding: 16px;
+    padding: 1rem;
+
+    cursor: pointer;
+    -webkit-transition: background-color .3s;
+            transition: background-color .3s;
+
+    background-color: var(--colour-grey-light);
+
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+}
+
+.site-header .load-budgets .date-list > li:hover
+{
+    background-color: var(--colour-accent);
+}
+
 .budget__titles .budget__title
 {
     font-family: 'Poppins', system-ui, sans-serif;
@@ -2249,31 +2352,11 @@ ol.no-style
         flex-wrap: nowrap;
 }
 
-@supports (gap: 1px)
+.budget__income .budget__amount .sign,
+.budget__expenses .budget__amount .sign,
+.budget__savings .budget__amount .sign
 {
-    .budget__income .budget__amount,
-    .budget__expenses .budget__amount,
-    .budget__savings .budget__amount
-    {
-        gap: 5px;
-    }
-}
-
-.budget__income .budget__amount .amount,
-.budget__expenses .budget__amount .amount,
-.budget__savings .budget__amount .amount
-{
-    margin-left: 5px;
-}
-
-@supports (gap: 1px)
-{
-    .budget__income .budget__amount .amount,
-    .budget__expenses .budget__amount .amount,
-    .budget__savings .budget__amount .amount
-    {
-        margin-left: unset;
-    }
+    margin-right: 4px;
 }
 
 .budget__income
@@ -2283,14 +2366,35 @@ ol.no-style
     background-color: var(--colour-success);
 }
 
-.budget__expenses .percentage,
-.budget__savings .percentage
+.budget__expenses .budget__data,
+.budget__savings .budget__data
+{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+        flex-direction: row;
+
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+}
+
+.budget__expenses .budget__percentage,
+.budget__savings .budget__percentage
 {
     font-size: 17px;
     font-weight: 200;
 
     width: 0;
-    margin-left: 0;
+    margin: 0;
     padding: 0;
 
     -webkit-transition: all .3s ease-in;
@@ -2301,8 +2405,8 @@ ol.no-style
     -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
 }
 
-.budget__expenses .percentage.show,
-.budget__savings .percentage.show
+.budget__expenses .budget__percentage.show,
+.budget__savings .budget__percentage.show
 {
     width: auto;
     margin-left: 5px;
@@ -2313,15 +2417,6 @@ ol.no-style
     -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
 }
 
-@supports (gap: 1px)
-{
-    .budget__expenses .percentage.show,
-    .budget__savings .percentage.show
-    {
-        margin-left: unset;
-    }
-}
-
 .budget__expenses
 {
     margin-bottom: 15px;
@@ -2329,7 +2424,7 @@ ol.no-style
     background-color: var(--colour-error);
 }
 
-.budget__expenses .percentage
+.budget__expenses .budget__percentage
 {
     background-color: hsla(0deg, 64.016736%, 68.137255%, 50%);
 }
@@ -2339,7 +2434,7 @@ ol.no-style
     background-color: var(--colour-secondary);
 }
 
-.budget__savings .percentage
+.budget__savings .budget__percentage
 {
     background-color: hsla(8.275862deg, 18.471338%, 84.215686%, 50%);
 }
@@ -2416,6 +2511,11 @@ ol.no-style
 .add__form .add__button > svg.exp
 {
     color: var(--colour-error);
+}
+
+.add__form .add__button > svg.sav
+{
+    color: var(--colour-secondary);
 }
 
 .income__title,
@@ -2497,16 +2597,6 @@ ol.no-style
         flex-flow: row wrap;
 }
 
-@supports (gap: 1px)
-{
-    .income__list > li .items,
-    .expenses__list > li .items,
-    .savings__list > li .items
-    {
-        gap: 5px;
-    }
-}
-
 .income__list > li .items__value,
 .income__list > li .items__percent,
 .expenses__list > li .items__value,
@@ -2515,19 +2605,6 @@ ol.no-style
 .savings__list > li .items__percent
 {
     margin-left: 5px;
-}
-
-@supports (gap: 1px)
-{
-    .income__list > li .items__value,
-    .income__list > li .items__percent,
-    .expenses__list > li .items__value,
-    .expenses__list > li .items__percent,
-    .savings__list > li .items__value,
-    .savings__list > li .items__percent
-    {
-        margin-left: unset;
-    }
 }
 
 .income__list > li .items__value,
@@ -5441,6 +5518,16 @@ ol.no-style
     .budget__income .budget__amount,
     .budget__expenses .budget__amount,
     .budget__savings .budget__amount
+    {
+            flex-direction: column;
+
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+    }
+
+    .budget__expenses .budget__data,
+    .budget__savings .budget__data
     {
             flex-direction: column;
 

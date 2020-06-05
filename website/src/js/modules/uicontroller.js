@@ -1,5 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import budgetController from './budgetcontroller'
+import PastBudget from './pastbudget'
+
+const pastbudget = new PastBudget()
 
 const formatNumber = (number, type, money = false, calc = true) => {
   /**
@@ -123,7 +126,9 @@ class UIController {
 
   displayPercentage(percentage, type) {
     const types = type === 'exp' ? 'expenses' : 'savings'
-    const percent = document.querySelector(`.budget__${types} .percentage`)
+    const percent = document.querySelector(
+      `.budget__${types} .budget__percentage`
+    )
 
     if (percentage > 0) {
       percent.classList.add('show')
@@ -209,11 +214,10 @@ class UIController {
   changeType() {
     const type = this.inputType
     const check = document.querySelector('#check')
-    const fields = [type, this.inputDesc, this.inputVal, check]
 
-    if (process.env.NODE_ENV !== 'production') {
-      console.log(fields)
-    }
+    // if (process.env.NODE_ENV !== 'production') {
+    //   console.log(fields)
+    // }
 
     type.addEventListener('change', (e) => {
       const options = Array.from(type.options)
@@ -229,17 +233,20 @@ class UIController {
         )
       }
 
-      fields.forEach((field) => {
-        field.classList.toggle('exp')
-      })
-      options.forEach((option, index) => {
+      options.forEach((option) => {
         if (option.selected) {
           option.setAttribute('selected', 'selected')
+          check.classList.remove('exp', 'sav')
+          if (option.value === 'exp') {
+            check.classList.add('exp')
+          } else if (option.value === 'sav') {
+            check.classList.add('sav')
+          }
         } else {
           option.removeAttribute('selected', 'selected')
         }
         if (process.env.NODE_ENV !== 'production') {
-          console.log(option, option.value, index)
+          console.log(`Value ${option.value}`)
         }
       })
     })
@@ -270,6 +277,22 @@ class UIController {
         // 4. Update and show the new percentages
         this.updatePercentages()
       }
+    })
+  }
+
+  saving() {
+    const button = document.querySelector('#save')
+    const getData = budgetController.calculateBudget()
+    const currentBudget = this.getBudget(getData)
+    button.addEventListener('click', () => {
+      pastbudget
+        .saveBudget(currentBudget)
+        .then(() => {
+          console.log('saved')
+        })
+        .catch((err) => {
+          console.error(err)
+        })
     })
   }
 }

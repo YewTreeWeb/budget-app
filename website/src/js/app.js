@@ -34,6 +34,8 @@ const controller = ((budgetCtrl) => {
   // Toggle the submit new cost from either income or expense.
   UICtrl.changeType()
 
+  budgetCtrl.testing()
+
   form.addEventListener('submit', (e) => {
     e.preventDefault()
 
@@ -66,8 +68,8 @@ const controller = ((budgetCtrl) => {
         console.log(newItem)
       }
     }
+    budgetCtrl.testing()
   })
-
   // Delete an added income or expense
   UICtrl.deleteItem()
 })(budgetController)
