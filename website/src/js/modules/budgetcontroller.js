@@ -116,8 +116,8 @@ const budgetController = (() => {
         data.allItems[type].splice(index, 1)
       }
     },
-    testing: () => {
-      console.log(data.allItems)
+    getData: () => {
+      return data
     },
   }
 })()

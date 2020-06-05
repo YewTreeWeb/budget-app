@@ -44,25 +44,28 @@
   {%- comment -%} Firebase {%- endcomment -%}
   {%- if site.firebase_project -%}
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
 
     <script>
       // Your web app's Firebase configuration
       var firebaseConfig = {
-        apiKey: "{{ site.firebase_appKey }}",
-        authDomain: "{{ site.firebase_project | append: '.firebaseapp.com' }}",
-        databaseURL: "{{ site.firebase_project | prepend: 'https://' | append: '.firebaseio.com' }}",
-        projectId: "{{ site.firebase_project }}",
-        storageBucket: "{{ site.firebase_project | append: '.appspot.com' }}",
-        messagingSenderId: "{{ site.firebase_messagingID }}",
-        appId: "{{ site.firebase_appID }}"
+        apiKey: "AIzaSyCSH8tqqrPsZzpPK6MOtUL6H2nRWiZVwZs",
+        authDomain: "budgety-760b5.firebaseapp.com",
+        databaseURL: "https://budgety-760b5.firebaseio.com",
+        projectId: "budgety-760b5",
+        storageBucket: "budgety-760b5.appspot.com",
+        messagingSenderId: "753784027921",
+        appId: "1:753784027921:web:85ee163242584f45d16ab0",
+        measurementId: "G-QQE89CHNQ4"
       };
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
       var db = firebase.firestore();
     </script>
   {%- endif -%}

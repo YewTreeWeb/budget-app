@@ -124,10 +124,11 @@ google:
   instant_search: # false (default), true
 
 # Firebase Hosting
-firebase_project: # YOUR PROJECT NAME
-firebase_apiKey: # FIREBASE API
-firebase_appID: # FIREBASE API ID
-firebase_messagingID: # FIREBASE messagingSenderId
+firebase_project: "budgety-760b5"
+firebase_apiKey: "AIzaSyCSH8tqqrPsZzpPK6MOtUL6H2nRWiZVwZs"
+firebase_appID: "1:753784027921:web:85ee163242584f45d16ab0"
+firebase_messagingID: "G-QQE89CHNQ4"
+firebase_measurementId: "G-QQE89CHNQ4"
 
 # Collections
 collections:

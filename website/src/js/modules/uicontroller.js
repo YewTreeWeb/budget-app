@@ -282,11 +282,11 @@ class UIController {
 
   saving() {
     const button = document.querySelector('#save')
-    const getData = budgetController.calculateBudget()
-    const currentBudget = this.getBudget(getData)
+    const data = budgetController.getData()
     button.addEventListener('click', () => {
+      console.log(data)
       pastbudget
-        .saveBudget(currentBudget)
+        .saveBudget(data)
         .then(() => {
           console.log('saved')
         })
