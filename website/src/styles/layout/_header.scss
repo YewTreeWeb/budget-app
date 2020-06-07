@@ -1,17 +1,58 @@
 .site-header {
+  @include padding(20px null);
+  > .container {
+    @include flex(center, space-between, row);
+  }
+  .navbar-brand {
+    .site-logo {
+      @include flex(center, center, row);
+      text-decoration: none;
+      &__title {
+        font-size: _heading((h4, 1));
+        font-family: $font-family-header;
+        opacity: 0;
+        transform: translateX(-56px);
+        transition: opacity 1s ease-in, transform 0.85s ease-in;
+        @include hardware;
+        z-index: 0;
+      }
+      &--active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      svg {
+        @include size(45px, 45px);
+        margin-right: 10px;
+        color: v(colour-accent);
+        position: relative;
+        z-index: 1;
+      }
+    }
+  }
+  .navbar-end {
+    width: 50%;
+    min-width: 300px;
+    > .navbar-item {
+      @include flex(center, space-evenly, row);
+      width: 100%;
+    }
+  }
   .load-budgets {
     position: relative;
     width: 300px;
+    @include flex(center, center, row, false);
     .chosen-date {
-      @include margin(0);
+      @include margin(0 10px null null);
       box-sizing: border-box;
-      @include size(100%, 4rem);
+      @include size(100%, 51px);
       text-transform: uppercase;
       font-weight: $weight;
+      font-size: $font-base;
       letter-spacing: 2px;
-      @include padding(1rem);
+      @include padding(10px 16px);
       background-color: v(colour-grey-light);
       border: 3px solid transparent;
+      border-radius: 8px;
       transition: 0.3s ease-in-out;
     }
     .date-list {

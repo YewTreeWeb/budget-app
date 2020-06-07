@@ -2162,25 +2162,179 @@ ol.no-style
     font-style: italic;
 }
 
+.site-header
+{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.site-header > .container
+{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
+}
+
+.site-header .navbar-brand .site-logo
+{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    text-decoration: none;
+
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
+}
+
+.site-header .navbar-brand .site-logo__title
+{
+    font-family: 'Roboto Condensed', system-ui, sans-serif;
+    font-size: 24px;
+
+    z-index: 0;
+
+    -webkit-transition: opacity 1s ease-in, -webkit-transform .85s ease-in;
+            transition: opacity 1s ease-in, -webkit-transform .85s ease-in;
+            transition: opacity 1s ease-in, transform .85s ease-in;
+            transition: opacity 1s ease-in, transform .85s ease-in, -webkit-transform .85s ease-in;
+    -webkit-transform: translateX(-56px);
+            transform: translateX(-56px);
+
+    opacity: 0;
+
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    will-change: auto;
+    -webkit-perspective: 1000;
+            perspective: 1000;
+}
+
+.site-header .navbar-brand .site-logo--active
+{
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+
+    opacity: 1;
+
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
+}
+
+.site-header .navbar-brand .site-logo svg
+{
+    position: relative;
+    z-index: 1;
+
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+
+    color: var(--colour-accent);
+}
+
+.site-header .navbar-end
+{
+    width: 50%;
+    min-width: 300px;
+}
+
+.site-header .navbar-end > .navbar-item
+{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    width: 100%;
+
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
+}
+
+@supports (-ms-ime-align: auto)
+{
+    .site-header .navbar-end > .navbar-item:before,
+    .site-header .navbar-end > .navbar-item:after
+    {
+        display: block;
+
+        content: '';
+    }
+}
+
+@supports not (-ms-ime-align: auto)
+{
+    .site-header .navbar-end > .navbar-item
+    {
+        -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+        justify-content: space-evenly;
+    }
+}
+
 .site-header .load-budgets
 {
     position: relative;
 
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+        flex-direction: row;
+
     width: 300px;
+
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
 }
 
 .site-header .load-budgets .chosen-date
 {
+    font-size: 16px;
     font-weight: 400;
 
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
     width: 100%;
-    height: 64px;
-    height: 4rem;
-    margin: 0;
-    padding: 16px;
-    padding: 1rem;
+    height: 51px;
+    margin-top: 0;
+    margin-right: 10px;
+    padding: 10px 16px;
 
     -webkit-transition: .3s ease-in-out;
             transition: .3s ease-in-out;
@@ -2188,6 +2342,7 @@ ol.no-style
     text-transform: uppercase;
 
     border: 3px solid transparent;
+    border-radius: 8px;
     background-color: var(--colour-grey-light);
 }
 
@@ -5515,6 +5670,15 @@ ol.no-style
 
 @media (max-width: 414px)
 {
+    .site-header .load-budgets
+    {
+            flex-direction: column;
+
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+    }
+
     .budget__income .budget__amount,
     .budget__expenses .budget__amount,
     .budget__savings .budget__amount
