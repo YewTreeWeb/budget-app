@@ -1,6 +1,13 @@
+/* eslint-disable prefer-object-spread */
 // todo: save budget data to firebase
 // todo: get allItems data to save so they can be repopulated when loaded.
 // todo: get the data from firebase when a date has been chosen from the select options and update the UI
+
+const arrayReassign = (ar) => {
+  return ar.map((obj) => {
+    return Object.assign({}, obj)
+  })
+}
 
 class PastBudget {
   constructor() {
@@ -9,22 +16,22 @@ class PastBudget {
 
   async saveBudget(obj) {
     const now = new Date()
-    // const { exp, inc, sav } = obj.allItems
-    const budget = {
-      budget: obj.budget,
-      totalInc: obj.totals.inc,
-      totalExp: obj.totals.exp,
-      totalSav: obj.totals.sav,
-      percentExp: obj.percent.exp,
-      percentSav: obj.percent.sav,
-      // allItems: {
-      //   exp,
-      //   inc,
-      //   sav,
-      // },
+    const { allItems, budget, percent, totals } = obj
+    const budgetData = {
+      budget,
+      totalInc: totals.inc,
+      totalExp: totals.exp,
+      totalSav: totals.sav,
+      percentExp: percent.exp,
+      percentSav: percent.sav,
+      allItems: {
+        inc: arrayReassign(allItems.inc),
+        exp: arrayReassign(allItems.exp),
+        sav: arrayReassign(allItems.sav),
+      },
       created_at: firebase.firestore.Timestamp.fromDate(now),
     }
-    const response = await this.budgets.add(budget)
+    const response = await this.budgets.add(budgetData)
     return response
   }
 
