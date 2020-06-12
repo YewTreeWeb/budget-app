@@ -284,47 +284,41 @@ class UIController {
   saving() {
     const button = document.querySelector('#save')
     const data = budgetController.getData()
-    const now = format(new Date(), 'dd/MM/yyyy')
-    const items = []
-    let found = false
-
     button.addEventListener('click', () => {
-      const list = document.querySelectorAll('.date-list > li')
-      const listItems = Array.from(list)
-      listItems.forEach((item) => {
-        items.push({ date: item.textContent, id: item.getAttribute('data-id') })
-      })
-      if (process.env.NODE_ENV !== 'production') {
-        console.log(data, data.allItems.inc, items)
-      }
-      // Check if items array has the current date
-      for (let i = 0; i < items.length; i++) {
-        if (items[i].date === now) {
-          found = true
-          break
-        }
+      const input = document.querySelector('.chosen-date')
+      const ID = input.value
+      let selected = false
+      // let ID = null
+      // listItems.forEach((item) => {
+      //   if (item.classList.contains('selected')) {
+      //     ID = item.getAttribute('data-id')
+      //     selected = true
+      //   }
+      // })
+
+      if (input.classList.contains('loaded')) {
+        selected = true
       }
 
-      // Update budget if it already exists or save a new budget
-      if (found) {
-        items.forEach((item) => {
-          if (item.date === now) {
-            pastbudget
-              .updateBudget(data, item.id)
-              .then(() => {
-                console.log('updated')
-                button.textContent = 'Updated'
-                button.classList.remove('btn--ghost')
-                setTimeout(() => {
-                  button.textContent = 'Save'
-                  button.classList.add('btn--ghost')
-                }, 4000)
-              })
-              .catch((err) => {
-                console.error(err)
-              })
-          }
-        })
+      if (process.env.NODE_ENV !== 'production') {
+        console.log(data, data.allItems.inc, ID)
+      }
+
+      if (selected && ID) {
+        pastbudget
+          .updateBudget(data, ID)
+          .then(() => {
+            console.log('updated')
+            button.textContent = 'Updated'
+            button.classList.remove('btn--ghost')
+            setTimeout(() => {
+              button.textContent = 'Save'
+              button.classList.add('btn--ghost')
+            }, 4000)
+          })
+          .catch((err) => {
+            console.error(err)
+          })
         if (process.env.NODE_ENV !== 'production') {
           console.log('has todays date')
         }
@@ -350,17 +344,90 @@ class UIController {
     })
   }
 
+  // saving() {
+  //   const button = document.querySelector('#save')
+  //   const data = budgetController.getData()
+  //   const now = format(new Date(), 'dd/MM/yyyy')
+  //   const items = []
+  //   let found = false
+
+  //   button.addEventListener('click', () => {
+  //     const list = document.querySelectorAll('.date-list > li')
+  //     const listItems = Array.from(list)
+  //     listItems.forEach((item) => {
+  //       items.push({ date: item.textContent, id: item.getAttribute('data-id') })
+  //     })
+  //     if (process.env.NODE_ENV !== 'production') {
+  //       console.log(data, data.allItems.inc, items)
+  //     }
+  //     // Check if items array has the current date
+  //     for (let i = 0; i < items.length; i++) {
+  //       if (items[i].date === now) {
+  //         found = true
+  //         break
+  //       }
+  //     }
+
+  //     // Update budget if it already exists or save a new budget
+  //     if (found) {
+  //       items.forEach((item) => {
+  //         if (item.date === now) {
+  //           pastbudget
+  //             .updateBudget(data, item.id)
+  //             .then(() => {
+  //               console.log('updated')
+  //               button.textContent = 'Updated'
+  //               button.classList.remove('btn--ghost')
+  //               setTimeout(() => {
+  //                 button.textContent = 'Save'
+  //                 button.classList.add('btn--ghost')
+  //               }, 4000)
+  //             })
+  //             .catch((err) => {
+  //               console.error(err)
+  //             })
+  //         }
+  //       })
+  //       if (process.env.NODE_ENV !== 'production') {
+  //         console.log('has todays date')
+  //       }
+  //     } else {
+  //       pastbudget
+  //         .saveBudget(data)
+  //         .then(() => {
+  //           console.log('saved')
+  //           button.textContent = 'Saved'
+  //           button.classList.remove('btn--ghost')
+  //           setTimeout(() => {
+  //             button.textContent = 'Save'
+  //             button.classList.add('btn--ghost')
+  //           }, 4000)
+  //         })
+  //         .catch((err) => {
+  //           console.error(err)
+  //         })
+  //       if (process.env.NODE_ENV !== 'production') {
+  //         console.log('does not have todays date')
+  //       }
+  //     }
+  //   })
+  // }
+
   loading() {
     const dropdown = document.querySelector('.date-list')
+    const noList = document.querySelector('.date-list li')
 
     pastbudget.getBudget((budgets, id) => {
       const date = budgets.created_at.toDate()
       if (date) {
         const when = format(new Date(date), 'dd/MM/yyyy')
-        const list = `<li class="date-list__item" data-date="${when}" data-id="${id}">${when}</li>`
+        const list = `<li class="date-list__item" data-id="${id}">${when}</li>`
+        if (noList.textContent === 'No saved dates') noList.remove()
         dropdown.innerHTML += list
       }
     })
+
+    // todo: Need to add select interaction and apply class and input value to load data on page
   }
 }
 

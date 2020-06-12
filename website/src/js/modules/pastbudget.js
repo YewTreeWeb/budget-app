@@ -36,7 +36,6 @@ class PastBudget {
   }
 
   async updateBudget(obj, id) {
-    const now = new Date()
     const { allItems, budget, percent, totals } = obj
     const budgetData = {
       budget,
@@ -50,7 +49,6 @@ class PastBudget {
         exp: arrayReassign(allItems.exp),
         sav: arrayReassign(allItems.sav),
       },
-      created_at: firebase.firestore.Timestamp.fromDate(now),
     }
     const response = await this.budgets.doc(id).update(budgetData)
     return response
