@@ -36,6 +36,9 @@ const controller = ((budgetCtrl) => {
   // Toggle the submit new cost from either income or expense.
   UICtrl.changeType()
 
+  // Load budgets from Firebase
+  UICtrl.loading()
+
   // Save budgets to Firebase
   UICtrl.saving()
 

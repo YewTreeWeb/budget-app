@@ -1,4 +1,5 @@
 /* eslint-disable class-methods-use-this */
+import { format } from 'date-fns'
 import budgetController from './budgetcontroller'
 import PastBudget from './pastbudget'
 
@@ -283,16 +284,82 @@ class UIController {
   saving() {
     const button = document.querySelector('#save')
     const data = budgetController.getData()
+    const now = format(new Date(), 'dd/MM/yyyy')
+    const items = []
+    let found = false
+
     button.addEventListener('click', () => {
-      console.log(data, data.allItems.inc)
-      pastbudget
-        .saveBudget(data)
-        .then(() => {
-          console.log('saved')
+      const list = document.querySelectorAll('.date-list > li')
+      const listItems = Array.from(list)
+      listItems.forEach((item) => {
+        items.push({ date: item.textContent, id: item.getAttribute('data-id') })
+      })
+      if (process.env.NODE_ENV !== 'production') {
+        console.log(data, data.allItems.inc, items)
+      }
+      // Check if items array has the current date
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].date === now) {
+          found = true
+          break
+        }
+      }
+
+      // Update budget if it already exists or save a new budget
+      if (found) {
+        items.forEach((item) => {
+          if (item.date === now) {
+            pastbudget
+              .updateBudget(data, item.id)
+              .then(() => {
+                console.log('updated')
+                button.textContent = 'Updated'
+                button.classList.remove('btn--ghost')
+                setTimeout(() => {
+                  button.textContent = 'Save'
+                  button.classList.add('btn--ghost')
+                }, 4000)
+              })
+              .catch((err) => {
+                console.error(err)
+              })
+          }
         })
-        .catch((err) => {
-          console.error(err)
-        })
+        if (process.env.NODE_ENV !== 'production') {
+          console.log('has todays date')
+        }
+      } else {
+        pastbudget
+          .saveBudget(data)
+          .then(() => {
+            console.log('saved')
+            button.textContent = 'Saved'
+            button.classList.remove('btn--ghost')
+            setTimeout(() => {
+              button.textContent = 'Save'
+              button.classList.add('btn--ghost')
+            }, 4000)
+          })
+          .catch((err) => {
+            console.error(err)
+          })
+        if (process.env.NODE_ENV !== 'production') {
+          console.log('does not have todays date')
+        }
+      }
+    })
+  }
+
+  loading() {
+    const dropdown = document.querySelector('.date-list')
+
+    pastbudget.getBudget((budgets, id) => {
+      const date = budgets.created_at.toDate()
+      if (date) {
+        const when = format(new Date(date), 'dd/MM/yyyy')
+        const list = `<li class="date-list__item" data-date="${when}" data-id="${id}">${when}</li>`
+        dropdown.innerHTML += list
+      }
     })
   }
 }

@@ -35,6 +35,27 @@ class PastBudget {
     return response
   }
 
+  async updateBudget(obj, id) {
+    const now = new Date()
+    const { allItems, budget, percent, totals } = obj
+    const budgetData = {
+      budget,
+      totalInc: totals.inc,
+      totalExp: totals.exp,
+      totalSav: totals.sav,
+      percentExp: percent.exp,
+      percentSav: percent.sav,
+      allItems: {
+        inc: arrayReassign(allItems.inc),
+        exp: arrayReassign(allItems.exp),
+        sav: arrayReassign(allItems.sav),
+      },
+      created_at: firebase.firestore.Timestamp.fromDate(now),
+    }
+    const response = await this.budgets.doc(id).update(budgetData)
+    return response
+  }
+
   getBudget(cb) {
     this.budgets.orderBy('created_at').onSnapshot((snapshot) => {
       snapshot.docChanges().forEach((change) => {
