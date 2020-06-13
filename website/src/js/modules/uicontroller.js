@@ -285,18 +285,19 @@ class UIController {
     const button = document.querySelector('#save')
     const data = budgetController.getData()
     button.addEventListener('click', () => {
-      const input = document.querySelector('.chosen-date')
-      const ID = input.value
+      // const list = document.querySelector('.date-list')
+      const input = document.querySelector('#chosen-ID')
+      const ID = input.value || null
       let selected = false
-      // let ID = null
-      // listItems.forEach((item) => {
-      //   if (item.classList.contains('selected')) {
-      //     ID = item.getAttribute('data-id')
+
+      // Array.from(list.children).forEach((child) => {
+      //   if (child.classList.contains('selected')) {
+      //     // ID = child.getAttribute('data-id')
       //     selected = true
       //   }
       // })
 
-      if (input.classList.contains('loaded')) {
+      if (input.classList.contains('chosen')) {
         selected = true
       }
 
@@ -314,14 +315,11 @@ class UIController {
             setTimeout(() => {
               button.textContent = 'Save'
               button.classList.add('btn--ghost')
-            }, 4000)
+            }, 2000)
           })
           .catch((err) => {
             console.error(err)
           })
-        if (process.env.NODE_ENV !== 'production') {
-          console.log('has todays date')
-        }
       } else {
         pastbudget
           .saveBudget(data)
@@ -332,14 +330,11 @@ class UIController {
             setTimeout(() => {
               button.textContent = 'Save'
               button.classList.add('btn--ghost')
-            }, 4000)
+            }, 2000)
           })
           .catch((err) => {
             console.error(err)
           })
-        if (process.env.NODE_ENV !== 'production') {
-          console.log('does not have todays date')
-        }
       }
     })
   }
@@ -413,20 +408,53 @@ class UIController {
   //   })
   // }
 
+  styledDropdown() {
+    const input = document.querySelector('#chosen-date')
+    const inputID = document.querySelector('#chosen-ID')
+    const dropdown = document.querySelector('.date-list')
+
+    input.addEventListener('focus', () => {
+      input.placeholder = 'Type to filter'
+      dropdown.classList.add('open')
+    })
+
+    input.addEventListener('blur', () => {
+      dropdown.classList.remove('open')
+      input.placeholder = 'Choose a date'
+    })
+
+    dropdown.addEventListener('click', (e) => {
+      if (process.env.NODE_ENV !== 'production') console.log(e, e.target)
+      inputID.classList.add('chosen')
+      Array.from(dropdown.children).forEach((child) => {
+        child.classList.remove('selected')
+      })
+      if (e.target.tagName === 'LI') {
+        const targetTxt = e.target.textContent
+        const targetID = e.target.getAttribute('data-id')
+        input.setAttribute('value', targetTxt)
+        input.placeholder = targetTxt
+        inputID.setAttribute('value', targetID)
+        e.target.classList.add('selected')
+      }
+    })
+  }
+
   loading() {
     const dropdown = document.querySelector('.date-list')
-    const noList = document.querySelector('.date-list li')
+    const dropdownList = document.querySelector('.date-list li')
 
     pastbudget.getBudget((budgets, id) => {
       const date = budgets.created_at.toDate()
       if (date) {
         const when = format(new Date(date), 'dd/MM/yyyy')
         const list = `<li class="date-list__item" data-id="${id}">${when}</li>`
-        if (noList.textContent === 'No saved dates') noList.remove()
+        if (dropdownList.textContent === 'No saved dates') dropdownList.remove()
         dropdown.innerHTML += list
       }
     })
 
+    this.styledDropdown()
     // todo: Need to add select interaction and apply class and input value to load data on page
   }
 }

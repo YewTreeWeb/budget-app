@@ -39,9 +39,9 @@
   }
   .load-budgets {
     position: relative;
-    width: 300px;
+    width: fit-content;
     @include flex(center, center, row, false);
-    .chosen-date {
+    #chosen-date {
       @include margin(0 10px null null);
       box-sizing: border-box;
       @include size(100%, 51px);
@@ -69,7 +69,9 @@
       box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
       overflow: hidden;
       max-height: 0;
-      transition: 0.3s ease-in-out;
+      z-index: 2;
+      transition: all 0.3s ease-in-out;
+      @include hardware;
       &.open {
         max-height: 320px;
         overflow: auto;
