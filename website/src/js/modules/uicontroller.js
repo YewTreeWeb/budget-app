@@ -41,6 +41,16 @@ const formatNumber = (number, type, money = false, calc = true) => {
   return `${sign}${currency}${int}${decimal}`
 }
 
+// Grab search term and filter.
+const filterTerms = (el, term) => {
+  Array.from(el.children)
+    .filter((item) => !item.textContent.toLowerCase().includes(term))
+    .forEach((item) => item.classList.add('filtered'))
+  Array.from(el.children)
+    .filter((item) => item.textContent.toLowerCase().includes(term))
+    .forEach((item) => item.classList.remove('filtered'))
+}
+
 /* eslint-disable prefer-destructuring */
 class UIController {
   constructor(cost, description, value) {
@@ -93,6 +103,24 @@ class UIController {
 
     // Insert HTML into the DOM
     list.innerHTML += html
+  }
+
+  loadedRender(data, id) {
+    const { allItems } = data
+    const input = document.querySelector('#chosen-ID')
+
+    if (id === input.value) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.log(
+          id,
+          data.budget,
+          data.totalInc,
+          data.totalExp,
+          allItems.inc,
+          allItems.exp
+        )
+      }
+    }
   }
 
   getBudget(data) {
@@ -423,6 +451,12 @@ class UIController {
       input.placeholder = 'Choose a date'
     })
 
+    input.addEventListener('input', (e) => {
+      const term = input.value.trim().toLowerCase()
+      filterTerms(dropdown, term)
+      if (process.env.NODE_ENV !== 'production') console.log(e)
+    })
+
     dropdown.addEventListener('click', (e) => {
       if (process.env.NODE_ENV !== 'production') console.log(e, e.target)
       inputID.classList.add('chosen')
@@ -440,10 +474,20 @@ class UIController {
     })
   }
 
+  Loaded() {
+    const form = document.querySelector('.load-budgets')
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      pastbudget.getBudget((data, id) => this.loadedRender(data, id))
+      form.reset()
+    })
+  }
+
   loading() {
     const dropdown = document.querySelector('.date-list')
     const dropdownList = document.querySelector('.date-list li')
 
+    // Get saved entry dates from Firebase
     pastbudget.getBudget((budgets, id) => {
       const date = budgets.created_at.toDate()
       if (date) {
@@ -454,8 +498,10 @@ class UIController {
       }
     })
 
+    // Add functionality to dropdown search
     this.styledDropdown()
-    // todo: Need to add select interaction and apply class and input value to load data on page
+    // Load the data from Firebase once date is chosen
+    this.Loaded()
   }
 }
 

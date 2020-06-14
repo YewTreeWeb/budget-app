@@ -88,3 +88,8 @@ body {
 .highlight {
   color: v(colour-accent);
 }
+
+.filtered,
+.hide {
+  display: none !important;
+}

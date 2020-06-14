@@ -1203,6 +1203,12 @@ body .asset-light
     color: var(--colour-accent);
 }
 
+.filtered,
+.hide
+{
+    display: none !important;
+}
+
 /* Generated using nucleoapp.com */
 
 /* --------------------------------
