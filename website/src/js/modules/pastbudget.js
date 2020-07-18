@@ -3,11 +3,7 @@
 // todo: get allItems data to save so they can be repopulated when loaded.
 // todo: get the data from firebase when a date has been chosen from the select options and update the UI
 
-const arrayReassign = (ar) => {
-  return ar.map((obj) => {
-    return Object.assign({}, obj)
-  })
-}
+import { arrayReassign } from './helpers'
 
 class PastBudget {
   constructor() {

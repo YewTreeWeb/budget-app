@@ -2,6 +2,7 @@
 import { format } from 'date-fns'
 import budgetController from './budgetcontroller'
 import PastBudget from './pastbudget'
+import { arrayReassign } from './helpers'
 
 const pastbudget = new PastBudget()
 
@@ -108,16 +109,54 @@ class UIController {
   loadedRender(data, id) {
     const { allItems } = data
     const input = document.querySelector('#chosen-ID')
+    const localData = budgetController.getData()
+    const budgetDate = document.querySelector('.budget__title')
 
     if (id === input.value) {
+      // Change the date for the available budget from today's date
+      const date = data.created_at.toDate()
+      const past = format(new Date(date), 'do MMMM yyyy')
+      budgetDate.textContent = `Available budget saved on ${past}`
+
+      // Display the saved data
+      this.displayBudget(data)
+      this.displayPercentage(data.percentExp, 'exp')
+      this.displayPercentage(data.percentSav, 'sav')
+
+      // Push the saved Firebase data to the budgetcontroller data object
+      localData.budget = data.budget
+      localData.totals.inc = data.totalInc
+      localData.totals.exp = data.totalExp
+      localData.totals.sav = data.totalSav
+      localData.percent.exp = data.percentExp
+      localData.percent.sav = data.percentSav
+
+      // Loop through the Firebase allItems object, render it in the UI and push to the budgetcontroller data object
+      allItems.inc.forEach((inc) => {
+        this.render(inc, 'inc')
+        budgetController.addItem('inc', inc.desc, inc.val)
+      })
+      allItems.exp.forEach((exp) => {
+        this.render(exp, 'exp')
+        budgetController.addItem('exp', exp.desc, exp.val)
+        this.updatePercentages('exp')
+      })
+      allItems.sav.forEach((sav) => {
+        this.render(sav, 'sav')
+        budgetController.addItem('sav', sav.desc, sav.val)
+        this.updatePercentages('sav')
+      })
       if (process.env.NODE_ENV !== 'production') {
         console.log(
-          id,
-          data.budget,
-          data.totalInc,
-          data.totalExp,
-          allItems.inc,
-          allItems.exp
+          // id,
+          // data.budget,
+          // data.totalInc,
+          // data.totalExp,
+          // allItems,
+          // allItems.hasOwnProperty('inc'),
+          // typeof allItems.inc,
+          // allItems.exp,
+          localData
         )
       }
     }
@@ -136,7 +175,6 @@ class UIController {
 
   displayBudget(obj) {
     const type = obj.budget > 0 ? 'inc' : 'exp'
-    const types = type === 'exp' ? 'expenses' : 'income'
     const budget = document.querySelector('.budget__value')
     const inc = document.querySelector(`.budget__income .budget__amount`)
     const exp = document.querySelector(`.budget__expenses .budget__amount`)
@@ -146,11 +184,6 @@ class UIController {
     inc.innerHTML = formatNumber(obj.totalInc, 'inc')
     exp.innerHTML = formatNumber(obj.totalExp, 'exp')
     sav.innerHTML = formatNumber(obj.totalSav, 'exp')
-
-    if (process.env.NODE_ENV !== 'production') {
-      console.log(`The ${types} is/are ${obj.budget}`)
-      console.log(inc, exp)
-    }
   }
 
   displayPercentage(percentage, type) {
@@ -209,15 +242,16 @@ class UIController {
     })
   }
 
-  updatePercentages() {
+  updatePercentages(data) {
+    const input = data || this.inputType.value
     // 1. Calulate percentages
-    budgetController.calculatePercentages(this.inputType.value)
+    budgetController.calculatePercentages(input)
 
     // 2. Read percentages from budget controller
-    const percentages = budgetController.getPercentages(this.inputType.value)
+    const percentages = budgetController.getPercentages(input)
 
     // 3. Update UI to show new percentages
-    this.displayPercentages(percentages, this.inputType.value)
+    this.displayPercentages(percentages, input)
   }
 
   displayDate() {
@@ -475,11 +509,32 @@ class UIController {
   }
 
   Loaded() {
+    // todo: clear all data from lists and allItems when loading a new budget
     const form = document.querySelector('.load-budgets')
+    const localData = budgetController.getData()
+    const lists = document.querySelectorAll(
+      '.income__list',
+      '.expenses__list',
+      '.savings__list'
+    )
     form.addEventListener('submit', (e) => {
       e.preventDefault()
+      // if (lists.children > 0) {
+      //   localData.allItems.inc = []
+      //   localData.allItems.exp = []
+      //   localData.allItems.sav = []
+
+      // }
+      Array.from(lists).forEach((list) => {
+        console.log(list)
+        console.log(list.children)
+      })
       pastbudget.getBudget((data, id) => this.loadedRender(data, id))
       form.reset()
+      if (process.env.NODE_ENV !== 'production') {
+        // console.log(lists)
+        // console.log(localData)
+      }
     })
   }
 

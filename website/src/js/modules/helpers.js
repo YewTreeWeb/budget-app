@@ -91,3 +91,12 @@ if (
 ) {
   console.log('localhost detected!')
 }
+
+// Reassign an array as an Object
+// eslint-disable-next-line import/prefer-default-export
+export const arrayReassign = (ar) => {
+  return ar.map((obj) => {
+    // eslint-disable-next-line prefer-object-spread
+    return Object.assign({}, obj)
+  })
+}
