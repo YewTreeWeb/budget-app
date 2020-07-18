@@ -2,11 +2,11 @@
 <link rel="dns-prefetch" href="//www.google-analytics.com">
 <link rel="dns-prefetch" href="//connect.facebook.net">
 <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
-<link rel="{% if site.firebase_project %}preconnect{% else %}dns-prefetch{% endif %}" href="https://www.gstatic.com" crossorigin>
-{%- if site.firebase_project -%}
-  <link rel="preconnect" href="{{ site.firebase_project | prepend: 'https://' | append: '.firebaseapp.com' }}" crossorigin>
-  <link rel="preconnect" href="{{ site.firebase_project | prepend: 'https://' | append: '.firebaseio.com' }}" crossorigin>
-  <link rel="preconnect" href="{{ site.firebase_project | prepend: 'https://' | append: '.appspot.com' }}" crossorigin>
+<link rel="{% if site.firebase_projectID %}preconnect{% else %}dns-prefetch{% endif %}" href="https://www.gstatic.com" crossorigin>
+{%- if site.firebase_projectID -%}
+  <link rel="preconnect" href="{{ site.firebase_projectID | prepend: 'https://' | append: '.firebaseapp.com' }}" crossorigin>
+  <link rel="preconnect" href="{{ site.firebase_projectID | prepend: 'https://' | append: '.firebaseio.com' }}" crossorigin>
+  <link rel="preconnect" href="{{ site.firebase_projectID | prepend: 'https://' | append: '.appspot.com' }}" crossorigin>
 {%- endif -%}
 <link rel="preconnect" href="https://instant.page" crossorigin>
 <link rel="prefetch" href="{{ '/assets/css/normalize.css' | relative.url }}">
