@@ -2,7 +2,6 @@
 import { format } from 'date-fns'
 import budgetController from './budgetcontroller'
 import PastBudget from './pastbudget'
-import { arrayReassign } from './helpers'
 
 const pastbudget = new PastBudget()
 
@@ -278,10 +277,6 @@ class UIController {
     const type = this.inputType
     const check = document.querySelector('#check')
 
-    // if (process.env.NODE_ENV !== 'production') {
-    //   console.log(fields)
-    // }
-
     type.addEventListener('change', (e) => {
       const options = Array.from(type.options)
 
@@ -317,28 +312,46 @@ class UIController {
 
   deleteItem() {
     const item = document.querySelector('.income-expenses')
+    let timesClicked = 0
+    item.addEventListener('mouseout', (e) => {
+      timesClicked = 0
+      const btn = e.target.closest('.items__del')
+      if (btn) {
+        e.target.parentElement.parentElement.classList.remove('confirm')
+        e.target.parentElement.previousSibling.textContent = ''
+      }
+    })
     item.addEventListener('click', (e) => {
-      if (e.target.id === 'delete') {
+      const btn = e.target.closest('.items__del')
+      if (btn) {
         const target = e.target.closest('.items').parentElement
         const splitID = target.id.split('-')
         const type = splitID[0]
         const ID = Number(splitID[1])
+        timesClicked += 1
 
         if (process.env.NODE_ENV !== 'production') {
           console.log(e.target, target, splitID, type, ID)
         }
 
-        // 1. Delete the item from the data structure
-        budgetController.removeItem(type, ID)
+        // Check if user has confirmed deletion before deleting
+        if (timesClicked > 1) {
+          // 1. Delete the item from the data structure
+          budgetController.removeItem(type, ID)
 
-        // 2. Delete the item from the UI
-        target.remove()
+          // 2. Delete the item from the UI
+          target.remove()
 
-        // 3. Update and show the new budget
-        this.updateBudget()
+          // 3. Update and show the new budget
+          this.updateBudget()
 
-        // 4. Update and show the new percentages
-        this.updatePercentages()
+          // 4. Update and show the new percentages
+          this.updatePercentages()
+        } else {
+          e.target.parentElement.parentElement.classList.add('confirm')
+          e.target.parentElement.previousSibling.textContent =
+            'Confirm deletion'
+        }
       }
     })
   }
@@ -347,17 +360,9 @@ class UIController {
     const button = document.querySelector('#save')
     const data = budgetController.getData()
     button.addEventListener('click', () => {
-      // const list = document.querySelector('.date-list')
       const input = document.querySelector('#chosen-ID')
       const ID = input.value || null
       let selected = false
-
-      // Array.from(list.children).forEach((child) => {
-      //   if (child.classList.contains('selected')) {
-      //     // ID = child.getAttribute('data-id')
-      //     selected = true
-      //   }
-      // })
 
       if (input.classList.contains('chosen')) {
         selected = true
@@ -401,75 +406,6 @@ class UIController {
     })
   }
 
-  // saving() {
-  //   const button = document.querySelector('#save')
-  //   const data = budgetController.getData()
-  //   const now = format(new Date(), 'dd/MM/yyyy')
-  //   const items = []
-  //   let found = false
-
-  //   button.addEventListener('click', () => {
-  //     const list = document.querySelectorAll('.date-list > li')
-  //     const listItems = Array.from(list)
-  //     listItems.forEach((item) => {
-  //       items.push({ date: item.textContent, id: item.getAttribute('data-id') })
-  //     })
-  //     if (process.env.NODE_ENV !== 'production') {
-  //       console.log(data, data.allItems.inc, items)
-  //     }
-  //     // Check if items array has the current date
-  //     for (let i = 0; i < items.length; i++) {
-  //       if (items[i].date === now) {
-  //         found = true
-  //         break
-  //       }
-  //     }
-
-  //     // Update budget if it already exists or save a new budget
-  //     if (found) {
-  //       items.forEach((item) => {
-  //         if (item.date === now) {
-  //           pastbudget
-  //             .updateBudget(data, item.id)
-  //             .then(() => {
-  //               console.log('updated')
-  //               button.textContent = 'Updated'
-  //               button.classList.remove('btn--ghost')
-  //               setTimeout(() => {
-  //                 button.textContent = 'Save'
-  //                 button.classList.add('btn--ghost')
-  //               }, 4000)
-  //             })
-  //             .catch((err) => {
-  //               console.error(err)
-  //             })
-  //         }
-  //       })
-  //       if (process.env.NODE_ENV !== 'production') {
-  //         console.log('has todays date')
-  //       }
-  //     } else {
-  //       pastbudget
-  //         .saveBudget(data)
-  //         .then(() => {
-  //           console.log('saved')
-  //           button.textContent = 'Saved'
-  //           button.classList.remove('btn--ghost')
-  //           setTimeout(() => {
-  //             button.textContent = 'Save'
-  //             button.classList.add('btn--ghost')
-  //           }, 4000)
-  //         })
-  //         .catch((err) => {
-  //           console.error(err)
-  //         })
-  //       if (process.env.NODE_ENV !== 'production') {
-  //         console.log('does not have todays date')
-  //       }
-  //     }
-  //   })
-  // }
-
   styledDropdown() {
     const input = document.querySelector('#chosen-date')
     const inputID = document.querySelector('#chosen-ID')
@@ -509,32 +445,28 @@ class UIController {
   }
 
   Loaded() {
-    // todo: clear all data from lists and allItems when loading a new budget
     const form = document.querySelector('.load-budgets')
     const localData = budgetController.getData()
-    const lists = document.querySelectorAll(
-      '.income__list',
-      '.expenses__list',
-      '.savings__list'
-    )
+    const income = document.querySelector('.income__list')
+    const expenses = document.querySelector('.expenses__list')
+    const savings = document.querySelector('.savings__list')
+    let dataLoaded = 0
+
     form.addEventListener('submit', (e) => {
       e.preventDefault()
-      // if (lists.children > 0) {
-      //   localData.allItems.inc = []
-      //   localData.allItems.exp = []
-      //   localData.allItems.sav = []
+      dataLoaded += 1
 
-      // }
-      Array.from(lists).forEach((list) => {
-        console.log(list)
-        console.log(list.children)
-      })
+      if (dataLoaded > 1) {
+        localData.allItems.inc = []
+        localData.allItems.exp = []
+        localData.allItems.sav = []
+        income.innerHTML = ''
+        expenses.innerHTML = ''
+        savings.innerHTML = ''
+        console.log(localData.allItems.inc)
+      }
       pastbudget.getBudget((data, id) => this.loadedRender(data, id))
       form.reset()
-      if (process.env.NODE_ENV !== 'production') {
-        // console.log(lists)
-        // console.log(localData)
-      }
     })
   }
 

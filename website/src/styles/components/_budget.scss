@@ -127,6 +127,7 @@
   &__title {
     text-align: center;
     margin-top: unset;
+    text-transform: uppercase;
   }
   &__list {
     list-style: none;
@@ -137,6 +138,31 @@
       box-sizing: border-box;
       padding: 13px;
       border-bottom: 1px solid v(colour-grey-light);
+      position: relative;
+      font-size: inherit;
+      font-family: inherit;
+      outline: none;
+      z-index: 1;
+      &::before {
+        content: '';
+        z-index: -1;
+        @include center(true, false);
+        top: 0;
+        bottom: 0;
+        background-color: v(colour-error);
+        transform-origin: center left;
+        transform: scaleX(0);
+        transition: transform 0.25s ease-in-out;
+      }
+      &.confirm {
+        &::before {
+          transform-origin: center right;
+          transform: scaleX(1);
+        }
+        p {
+          display: none;
+        }
+      }
       &:first-child {
         border-top: 1px solid v(colour-grey-light);
       }
@@ -159,26 +185,8 @@
         &__del {
           line-height: normal;
           @include size(null, 20px);
-          opacity: 0;
-          margin-left: 0;
-          transition: opacity 1.4s ease-in-out;
           > svg {
             @include size(0, 20px);
-            width: 0;
-            transition: width 0.2s ease-in-out;
-          }
-        }
-        @include call-to-action {
-          .items__del {
-            width: auto;
-            opacity: 1;
-            margin-left: 5px;
-            @supports (gap: 1px) {
-              margin-left: unset;
-            }
-            > svg {
-              @include size(20px, null);
-            }
           }
         }
       }

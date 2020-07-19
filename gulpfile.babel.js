@@ -1,27 +1,27 @@
 /* eslint-disable no-console */
-import gulp from 'gulp'
-import autoprefixer from 'autoprefixer'
-import rucksack from 'rucksack-css'
-import webpack from 'webpack'
-import webpackStream from 'webpack-stream'
-import named from 'vinyl-named'
-import buffer from 'vinyl-buffer'
-import merge from 'merge-stream'
-import browserSync from 'browser-sync'
-import plugins from 'gulp-load-plugins'
-import del from 'del'
-import read from 'read-yaml'
-import shell from 'shelljs'
-import pngquant from 'imagemin-pngquant'
-import jpegtran from 'imagemin-jpegtran'
-import zopfli from 'imagemin-zopfli'
-import giflossy from 'imagemin-giflossy'
-import mozjpeg from 'imagemin-mozjpeg'
-import webp from 'imagemin-webp'
-import extReplace from 'gulp-ext-replace'
-import yargs from 'yargs'
-import pkg from './package.json'
-import webpackConfig from './config/webpack.config'
+const gulp = require('gulp')
+const autoprefixer = require('autoprefixer')
+const rucksack = require('rucksack-css')
+const webpack = require('webpack')
+const webpackStream = require('webpack-stream')
+const named = require('vinyl-named')
+const buffer = require('vinyl-buffer')
+const merge = require('merge-stream')
+const browserSync = require('browser-sync')
+const plugins = require('gulp-load-plugins')
+const del = require('del')
+const read = require('read-yaml')
+const shell = require('shelljs')
+const pngquant = require('imagemin-pngquant')
+const jpegtran = require('imagemin-jpegtran')
+const zopfli = require('imagemin-zopfli')
+const giflossy = require('imagemin-giflossy')
+const mozjpeg = require('imagemin-mozjpeg')
+const webp = require('imagemin-webp')
+const extReplace = require('gulp-ext-replace')
+const yargs = require('yargs')
+const pkg = require('./package.json')
+const webpackConfig = require('./config/webpack.config')
 
 const { src, dest, watch, lastRun, series, parallel } = gulp
 
@@ -405,15 +405,18 @@ export const html = () => {
     .pipe($.plumber())
     .pipe($.htmlAutoprefixer())
     .pipe(
-      $.htmlmin({
-        removeComments: true,
-        collapseWhitespace: true,
-        collapseBooleanAttributes: false,
-        removeAttributeQuotes: false,
-        removeRedundantAttributes: false,
-        minifyJS: true,
-        minifyCSS: true,
-      })
+      $.if(
+        prod,
+        $.htmlmin({
+          removeComments: true,
+          collapseWhitespace: true,
+          collapseBooleanAttributes: false,
+          removeAttributeQuotes: false,
+          removeRedundantAttributes: false,
+          minifyJS: true,
+          minifyCSS: true,
+        })
+      )
     )
     .pipe(
       $.size({
