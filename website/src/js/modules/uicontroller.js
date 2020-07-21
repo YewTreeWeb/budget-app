@@ -317,8 +317,8 @@ class UIController {
       timesClicked = 0
       const btn = e.target.closest('.items__del')
       if (btn) {
-        e.target.parentElement.parentElement.classList.remove('confirm')
-        e.target.parentElement.previousSibling.textContent = ''
+        e.target.closest('.items').parentElement.classList.remove('confirm')
+        // e.target.closest('.items').parentElement.find('p').remove()
       }
     })
     item.addEventListener('click', (e) => {
@@ -348,9 +348,16 @@ class UIController {
           // 4. Update and show the new percentages
           this.updatePercentages()
         } else {
-          e.target.parentElement.parentElement.classList.add('confirm')
-          e.target.parentElement.previousSibling.textContent =
-            'Confirm deletion'
+          console.log(
+            'this is the grandparent of e.target',
+            e.target.parentElement.parentElement
+          )
+          e.target
+            .closest('.items')
+            .parentElement.firstElementChild.appendChild(
+              '<p>Confirm deletion</p>'
+            )
+          // .insertAdjacentHTML('beforebegin', '<p>Confirm deletion</p>')
         }
       }
     })

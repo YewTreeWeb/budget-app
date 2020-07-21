@@ -160,7 +160,9 @@
           transform: scaleX(1);
         }
         p {
-          display: none;
+          &:first-of-type {
+            display: none;
+          }
         }
       }
       &:first-child {
